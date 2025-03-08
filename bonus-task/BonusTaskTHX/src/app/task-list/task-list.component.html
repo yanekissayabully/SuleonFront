@@ -1,0 +1,7 @@
+<div>
+  <h2>Task List</h2>
+  <app-task-item
+    *ngFor="let task of tasks" [task]="task"
+    (completion) = "childData($event)"
+    ></app-task-item>
+</div>
