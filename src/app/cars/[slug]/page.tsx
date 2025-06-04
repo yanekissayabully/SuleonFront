@@ -31,6 +31,7 @@ import ContactForm from '@/components/ContactForm';
 import CarCard from '@/components/CarCard';
 import { getCarBySlug, cars, Car } from '@/data/cars';
 import Interior360View from '@/components/carDetail/Interior360View';
+import View360 from '@/components/carDetail/Viewer360';
 
 interface CarDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -102,6 +103,37 @@ const CarDetailPage = ({ params }: CarDetailPageProps) => {
     seating: Users,
     bodyType: CarIcon
   };
+
+
+const imageUrls = [
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvNGM4MmM5ZGM4ZjJhM2IxYzc5OTc5NDJiZjkxYjg2OTIucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvODhiZTEwZmM4NzQ3NGQzYzRkZTAyNjZhMmFiYzU3ZWIucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvZjZhNDlkYWFlMDg1NDE2ZGJkNGNmNDk0ODAyNzYxY2UucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvZTYyNjA1ZGNkNjczNDgxYTgwZDRhMmYwMDYzMWY0M2IucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvZTcxYTlhOWY4Nzc0YTJlMjFkNzczOWUwZTY5MWU5MjUucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvM2FiNzRmOTA1MTdkMDdiZjBmMGRlYmI3Y2ExOTJiNjAucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvMzVkMDhjZGRjMTM4OGVhOTg2NDVjZmYwMGI4YmIyM2IucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvOWY3YTZjNDljMDY5OTNlZGI0M2EzZWRmM2Q2MGYxOTEucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvMDAyYmM5YzQwNjBiODFlZmMwODU5YTU0ZDEzZjMyZDYucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvYmMyZTgwNDY4NTI3ODA3OTc0ODE0YzIxNWNiYzk4ZGQucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvOGRjMDg5ZjA3NWY1OGFmZWRkYWE3MDM1OTYxNTkyYmYucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvYzExNjQ4OTIxNjZlOWVlNTlhMTNiNjE4ODA3ZDYyNTgucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvZTU3MjBjN2Y3NjQ5MTJjNTkxMTc1OTI1MmM3NGE0ZjgucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvMTVkYWQ3YmZiZjFhOGFiNzgzMjRkMWZkMGM4YjBkOWUucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvZTA2OWM2MGU4OGRlYjU4ZGQ5MTk3ODhiZTAwMmM3ODIucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvZjBhNGZlZTM0NGM5YzEwODMxMDNhMjliNmExNzE0MDgucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvM2I0MTE2ODcwM2RjYmRmMjA4NDNjNzNjZjIxOTc3YjcucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvYTE1NjJlYzZmYWE4YWIyNTgyNmJlMTQ1ZTA3MmZlODUucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvMTJhYzg2MjYwNzc2MGFmN2QyMGE2NzVkMTc0MTAzNWMucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvNWEzZjlkMmIxMjE0ODc2YWZiNjM1NjIzODM1MGY2NzcucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvYjUwYTUwNWI0YjY5ZmM3YTVjMTVhNmJiOTc1YTBmNzQucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvODI1YjU4MWYwNzdiZDE4MThhOGU2YTgwMzk5ZjdkYTQucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvZDFlOWUxNWFjNDI0MjUzZWQ5ZjQzNTZhOGRlYzYxNzIucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvYTRmYWQ5NWQ3ODRlODc3YWNiMWQ1MGI5M2Q1Yjc4ZDIucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvZWY3MWJiZjM5NjliZTU0OThjNDhkYTM5YzMwZmI3YWUucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvOGNhNzgyZDY0ZDNkZDk0MjY3OTlhNDFkM2YzMzcwMDIucG5nfDEyMDB8ODAwfGE=.webp",
+  "https://ncars.com.ua/images/ZGF0YS8zNjAvNDU0MF9jZmNmY2YvYTVkNjE2ZmMzMGY2NDU1NTI3MmY0YTZmZjk4N2E5YWEucG5nfDEyMDB8ODAwfGE=.webp"
+];
 
   
 
@@ -281,6 +313,7 @@ const CarDetailPage = ({ params }: CarDetailPageProps) => {
             )}
           </div>
 
+
         </div>
             
         {/* Tabs Section */}
@@ -432,6 +465,10 @@ const CarDetailPage = ({ params }: CarDetailPageProps) => {
 
           </Tabs>
         </div>
+
+        <View360 images={imageUrls} />
+
+
       {/* 360 View */}
       <Interior360View />
         {/* Contact Form */}
