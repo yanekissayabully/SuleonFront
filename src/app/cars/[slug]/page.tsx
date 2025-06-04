@@ -30,6 +30,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ContactForm from '@/components/ContactForm';
 import CarCard from '@/components/CarCard';
 import { getCarBySlug, cars, Car } from '@/data/cars';
+import Interior360View from '@/components/carDetail/Interior360View';
 
 interface CarDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -279,8 +280,9 @@ const CarDetailPage = ({ params }: CarDetailPageProps) => {
               </div>
             )}
           </div>
-        </div>
 
+        </div>
+            
         {/* Tabs Section */}
         <div className="mt-16">
           <Tabs defaultValue="specs" className="w-full">
@@ -430,7 +432,8 @@ const CarDetailPage = ({ params }: CarDetailPageProps) => {
 
           </Tabs>
         </div>
-
+      {/* 360 View */}
+      <Interior360View />
         {/* Contact Form */}
         <div className="mt-16" id='contact-form'>
           <ContactForm
