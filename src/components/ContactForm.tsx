@@ -1,12 +1,290 @@
-"use client";
+// "use client";
+
+// import { useState } from "react";
+// import { motion } from "framer-motion";
+// import { Send, Phone, Mail, MessageCircle } from "lucide-react";
+// import { Button } from "@/components/ui/button";
+// import { Input } from "@/components/ui/input";
+// import { Textarea } from "@/components/ui/textarea";
+// import { Label } from "@/components/ui/label";
+
+// interface ContactFormProps {
+//   title?: string;
+//   subtitle?: string;
+//   className?: string;
+// }
+
+// const ContactForm = ({
+//   title = "У вас есть вопросы?",
+//   subtitle = "Заполните форму ниже, и мы свяжемся с вами в ближайшее время",
+//   className = "",
+// }: ContactFormProps) => {
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     phone: "",
+//     email: "",
+//     message: "",
+//     carInterest: "",
+//   });
+//   const [isSubmitting, setIsSubmitting] = useState(false);
+//   const [isSubmitted, setIsSubmitted] = useState(false);
+
+//   const handleInputChange = (
+//     e: React.ChangeEvent<
+//       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+//     >
+//   ) => {
+//     const { name, value } = e.target;
+//     setFormData((prev) => ({
+//       ...prev,
+//       [name]: value,
+//     }));
+//   };
+
+//   const handleSubmit = async (e: React.FormEvent) => {
+//   e.preventDefault();
+//   setIsSubmitting(true);
+
+//   const token = "7045960985:AAHKiMt_9lHo2HuJxtmomhX4UDXS6IzxFnY";
+//   const chatId = "914762159";
+
+//   const text = `
+// 🚗 Новая заявка:
+
+// 👤 Имя: ${formData.name}
+// 📞 Телефон: ${formData.phone}
+// 📧 Email: ${formData.email || "Не указан"}
+// 🚙 Интересующая модель: ${formData.carInterest || "Не выбрана"}
+// 💬 Сообщение: ${formData.message || "Нет сообщения"}
+//   `;
+
+//   try {
+//     await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         chat_id: chatId,
+//         text: text,
+//       }),
+//     });
+
+//     setIsSubmitted(true);
+//     setIsSubmitting(false);
+
+//     setTimeout(() => {
+//       setIsSubmitted(false);
+//       setFormData({
+//         name: "",
+//         phone: "",
+//         email: "",
+//         message: "",
+//         carInterest: "",
+//       });
+//     }, 3000);
+//   } catch (error) {
+//     console.error("Ошибка отправки в Телегу:", error);
+//     setIsSubmitting(false);
+//   }
+// };
+
+
+//   if (isSubmitted) {
+//     return (
+//       <motion.div
+//         className={`bg-white rounded-xl shadow-lg p-8 ${className}`}
+//         initial={{ opacity: 0, scale: 0.9 }}
+//         animate={{ opacity: 1, scale: 1 }}
+//         transition={{ duration: 0.3 }}
+//       >
+//         <div className="text-center">
+//           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+//             <MessageCircle className="w-8 h-8 text-green-600" />
+//           </div>
+//           <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+//             Спасибо за обращение!
+//           </h3>
+//           <p className="text-gray-600">
+//             Мы получили ваше сообщение и свяжемся с вами в ближайшее время.
+//           </p>
+//         </div>
+//       </motion.div>
+//     );
+//   }
+
+//   return (
+//     <motion.div
+//       className={`bg-white rounded-xl shadow-lg p-8 ${className}`}
+//       initial={{ opacity: 0, y: 20 }}
+//       animate={{ opacity: 1, y: 0 }}
+//       transition={{ duration: 0.3 }}
+//     >
+//       <div className="text-center mb-8">
+//         <h3 className="text-2xl font-semibold text-gray-900 mb-2">{title}</h3>
+//         <p className="text-gray-600">{subtitle}</p>
+//       </div>
+
+//       <form onSubmit={handleSubmit} className="space-y-6">
+//         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//           <div>
+//             <Label
+//               htmlFor="name"
+//               className="text-sm font-medium text-gray-700 mb-2 block"
+//             >
+//               Имя *
+//             </Label>
+//             <Input
+//               id="name"
+//               name="name"
+//               type="text"
+//               required
+//               value={formData.name}
+//               onChange={handleInputChange}
+//               placeholder="Ваше имя"
+//               className="w-full"
+//             />
+//           </div>
+
+//           <div>
+//             <Label
+//               htmlFor="phone"
+//               className="text-sm font-medium text-gray-700 mb-2 block"
+//             >
+//               Телефон *
+//             </Label>
+//             <Input
+//               id="phone"
+//               name="phone"
+//               type="tel"
+//               required
+//               value={formData.phone}
+//               onChange={handleInputChange}
+//               placeholder="+7 (777) 777 77 77"
+//               className="w-full"
+//             />
+//           </div>
+//         </div>
+
+//         <div>
+//           <Label
+//             htmlFor="email"
+//             className="text-sm font-medium text-gray-700 mb-2 block"
+//           >
+//             Email
+//           </Label>
+//           <Input
+//             id="email"
+//             name="email"
+//             type="email"
+//             value={formData.email}
+//             onChange={handleInputChange}
+//             placeholder="your@email.com"
+//             className="w-full"
+//           />
+//         </div>
+
+//         <div>
+//           <Label
+//             htmlFor="carInterest"
+//             className="text-sm font-medium text-gray-700 mb-2 block"
+//           >
+//             Интересующая модель
+//           </Label>
+//           <select
+//             id="carInterest"
+//             name="carInterest"
+//             value={formData.carInterest}
+//             onChange={handleInputChange}
+//             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+//           >
+//             <option value="">Выберите модель</option>
+//             <option value="byd-song-plus">BYD Song Plus</option>
+//             <option value="byd-sea-lion-07">BYD Sea Lion 07</option>
+//             <option value="volkswagen-id-unyx">Volkswagen ID. UNYX</option>
+//             <option value="zeekr-7x">ZEEKR 7X</option>
+//             <option value="xiaomi-su7">Xiaomi SU7</option>
+//             <option value="other">Другая модель</option>
+//           </select>
+//         </div>
+
+//         <div>
+//           <Label
+//             htmlFor="message"
+//             className="text-sm font-medium text-gray-700 mb-2 block"
+//           >
+//             Сообщение
+//           </Label>
+//           <Textarea
+//             id="message"
+//             name="message"
+//             rows={4}
+//             value={formData.message}
+//             onChange={handleInputChange}
+//             placeholder="Расскажите, что вас интересует или какие у вас есть вопросы..."
+//             className="w-full"
+//           />
+//         </div>
+
+//         <Button
+//           type="submit"
+//           disabled={isSubmitting}
+//           className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3"
+//         >
+//           {isSubmitting ? (
+//             <>
+//               <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+//               Отправляем...
+//             </>
+//           ) : (
+//             <>
+//               <Send className="w-4 h-4 mr-2" />
+//               Отправить сообщение
+//             </>
+//           )}
+//         </Button>
+//       </form>
+
+//       {/* Alternative contact methods */}
+//       <div className="mt-8 pt-8 border-t border-gray-200">
+//         <p className="text-sm text-gray-600 text-center mb-4">
+//           Или свяжитесь с нами напрямую:
+//         </p>
+//         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+//           <a
+//             href="tel:+380639969944"
+//             className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
+//           >
+//             <Phone className="w-4 h-4" />
+//             +7 (775) 504 91 24
+//           </a>
+//           <a
+//             href="mailto:info@LuxAuto.com.ua"
+//             className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
+//           >
+//             <Mail className="w-4 h-4" />
+//             suleon_auto@gmail.com
+//           </a>
+//         </div>
+//       </div>
+//     </motion.div>
+//   );
+// };
+
+// export default ContactForm;
+
+
+"use client"; // если ты в app/ структуре
 
 import { useState } from "react";
+import { useParams } from "next/navigation"; // Если ты в app/router (Next.js 13/14)
 import { motion } from "framer-motion";
 import { Send, Phone, Mail, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { cars } from "@/data/cars"; // ⚠️ Подгони путь к своим тачкам
 
 interface ContactFormProps {
   title?: string;
@@ -42,13 +320,13 @@ const ContactForm = ({
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  const token = "7045960985:AAHKiMt_9lHo2HuJxtmomhX4UDXS6IzxFnY";
-  const chatId = "914762159";
+    const token = "7045960985:AAHKiMt_9lHo2HuJxtmomhX4UDXS6IzxFnY"; // ⚠️ Сюда токен
+    const chatId = "914762159"; // ⚠️ Сюда chatId
 
-  const text = `
+    const text = `
 🚗 Новая заявка:
 
 👤 Имя: ${formData.name}
@@ -56,39 +334,45 @@ const ContactForm = ({
 📧 Email: ${formData.email || "Не указан"}
 🚙 Интересующая модель: ${formData.carInterest || "Не выбрана"}
 💬 Сообщение: ${formData.message || "Нет сообщения"}
-  `;
+    `;
 
-  try {
-    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: text,
-      }),
-    });
-
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        message: "",
-        carInterest: "",
+    try {
+      await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: text,
+        }),
       });
-    }, 3000);
-  } catch (error) {
-    console.error("Ошибка отправки в Телегу:", error);
-    setIsSubmitting(false);
-  }
-};
 
+      setIsSubmitted(true);
+      setIsSubmitting(false);
+
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: "",
+          phone: "",
+          email: "",
+          message: "",
+          carInterest: "",
+        });
+      }, 3000);
+    } catch (error) {
+      console.error("Ошибка отправки в Телегу:", error);
+      setIsSubmitting(false);
+    }
+  };
+
+  // 🛑 Вот тут магия происходит
+  const params = useParams();
+  const slug = params?.slug; // `byd-song-plus` например
+
+  const selectedCar = cars.find((car) => car.slug === slug);
+  const backgroundImage = selectedCar?.images.main || "";
 
   if (isSubmitted) {
     return (
@@ -115,159 +399,174 @@ const ContactForm = ({
 
   return (
     <motion.div
-      className={`bg-white rounded-xl shadow-lg p-8 ${className}`}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className="text-center mb-8">
-        <h3 className="text-2xl font-semibold text-gray-900 mb-2">{title}</h3>
-        <p className="text-gray-600">{subtitle}</p>
-      </div>
+  className={`relative overflow-hidden rounded-2xl p-8 ${className}`}
+  style={{
+    backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  }}
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.3 }}
+>
+  {/* Оверлей с мягким затемнением */}
+  {backgroundImage && (
+    <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-0"></div>
+  )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <Label
-              htmlFor="name"
-              className="text-sm font-medium text-gray-700 mb-2 block"
-            >
-              Имя *
-            </Label>
-            <Input
-              id="name"
-              name="name"
-              type="text"
-              required
-              value={formData.name}
-              onChange={handleInputChange}
-              placeholder="Ваше имя"
-              className="w-full"
-            />
-          </div>
+  {/* Сама форма */}
+  <div className="relative z-10 bg-white/20 backdrop-blur-lg border border-white/30 rounded-2xl shadow-xl p-8 text-white max-w-2xl mx-auto">
+    <div className="text-center mb-8">
+      <h3 className="text-3xl font-semibold mb-2">{title}</h3>
+      <p className="text-white/80">{subtitle}</p>
+    </div>
 
-          <div>
-            <Label
-              htmlFor="phone"
-              className="text-sm font-medium text-gray-700 mb-2 block"
-            >
-              Телефон *
-            </Label>
-            <Input
-              id="phone"
-              name="phone"
-              type="tel"
-              required
-              value={formData.phone}
-              onChange={handleInputChange}
-              placeholder="+7 (777) 777 77 77"
-              className="w-full"
-            />
-          </div>
-        </div>
-
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <Label
-            htmlFor="email"
-            className="text-sm font-medium text-gray-700 mb-2 block"
+            htmlFor="name"
+            className="text-sm font-medium mb-2 block text-white/80"
           >
-            Email
+            Имя *
           </Label>
           <Input
-            id="email"
-            name="email"
-            type="email"
-            value={formData.email}
+            id="name"
+            name="name"
+            type="text"
+            required
+            value={formData.name}
             onChange={handleInputChange}
-            placeholder="your@email.com"
-            className="w-full"
+            placeholder="Ваше имя"
+            className="w-full bg-white/10 border-white/20 placeholder-white/60 text-white"
           />
         </div>
 
         <div>
           <Label
-            htmlFor="carInterest"
-            className="text-sm font-medium text-gray-700 mb-2 block"
+            htmlFor="phone"
+            className="text-sm font-medium mb-2 block text-white/80"
           >
-            Интересующая модель
+            Телефон *
           </Label>
-          <select
-            id="carInterest"
-            name="carInterest"
-            value={formData.carInterest}
+          <Input
+            id="phone"
+            name="phone"
+            type="tel"
+            required
+            value={formData.phone}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          >
-            <option value="">Выберите модель</option>
-            <option value="byd-song-plus">BYD Song Plus</option>
-            <option value="byd-sea-lion-07">BYD Sea Lion 07</option>
-            <option value="volkswagen-id-unyx">Volkswagen ID. UNYX</option>
-            <option value="zeekr-7x">ZEEKR 7X</option>
-            <option value="xiaomi-su7">Xiaomi SU7</option>
-            <option value="other">Другая модель</option>
-          </select>
-        </div>
-
-        <div>
-          <Label
-            htmlFor="message"
-            className="text-sm font-medium text-gray-700 mb-2 block"
-          >
-            Сообщение
-          </Label>
-          <Textarea
-            id="message"
-            name="message"
-            rows={4}
-            value={formData.message}
-            onChange={handleInputChange}
-            placeholder="Расскажите, что вас интересует или какие у вас есть вопросы..."
-            className="w-full"
+            placeholder="+7 (777) 777 77 77"
+            className="w-full bg-white/10 border-white/20 placeholder-white/60 text-white"
           />
-        </div>
-
-        <Button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3"
-        >
-          {isSubmitting ? (
-            <>
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-              Отправляем...
-            </>
-          ) : (
-            <>
-              <Send className="w-4 h-4 mr-2" />
-              Отправить сообщение
-            </>
-          )}
-        </Button>
-      </form>
-
-      {/* Alternative contact methods */}
-      <div className="mt-8 pt-8 border-t border-gray-200">
-        <p className="text-sm text-gray-600 text-center mb-4">
-          Или свяжитесь с нами напрямую:
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a
-            href="tel:+380639969944"
-            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
-          >
-            <Phone className="w-4 h-4" />
-            +7 (775) 504 91 24
-          </a>
-          <a
-            href="mailto:info@LuxAuto.com.ua"
-            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
-          >
-            <Mail className="w-4 h-4" />
-            suleon_auto@gmail.com
-          </a>
         </div>
       </div>
-    </motion.div>
+
+      <div>
+        <Label
+          htmlFor="email"
+          className="text-sm font-medium mb-2 block text-white/80"
+        >
+          Email
+        </Label>
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          placeholder="your@email.com"
+          className="w-full bg-white/10 border-white/20 placeholder-white/60 text-white"
+        />
+      </div>
+
+      <div>
+        <Label
+          htmlFor="carInterest"
+          className="text-sm font-medium mb-2 block text-white/80"
+        >
+          Интересующая модель
+        </Label>
+        <select
+          id="carInterest"
+          name="carInterest"
+          value={formData.carInterest}
+          onChange={handleInputChange}
+          className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-black placeholder-white/60"
+        >
+          <option value="">Выберите модель</option>
+          <option value="byd-song-plus">BYD Song Plus</option>
+          <option value="byd-sea-lion-07">BYD Sea Lion 07</option>
+          <option value="volkswagen-id-unyx">Volkswagen ID. UNYX</option>
+          <option value="zeekr-7x">ZEEKR 7X</option>
+          <option value="xiaomi-su7">Xiaomi SU7</option>
+          <option value="other">Другая модель</option>
+        </select>
+      </div>
+
+      <div>
+        <Label
+          htmlFor="message"
+          className="text-sm font-medium mb-2 block text-white/80"
+        >
+          Сообщение
+        </Label>
+        <Textarea
+          id="message"
+          name="message"
+          rows={4}
+          value={formData.message}
+          onChange={handleInputChange}
+          placeholder="Ваши вопросы или пожелания..."
+          className="w-full bg-white/10 border-white/20 placeholder-white/60 text-white"
+        />
+      </div>
+
+      <Button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-md transition"
+      >
+        {isSubmitting ? (
+          <>
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+            Отправляем...
+          </>
+        ) : (
+          <>
+            <Send className="w-4 h-4 mr-2" />
+            Отправить сообщение
+          </>
+        )}
+      </Button>
+    </form>
+
+    {/* Контакты */}
+    <div className="mt-8 pt-8 border-t border-white/20">
+      <p className="text-sm text-white/80 text-center mb-4">
+        Или свяжитесь с нами напрямую:
+      </p>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a
+          href="tel:+77775049124"
+          className="flex items-center gap-2 text-blue-500 hover:text-blue-400 transition-colors"
+        >
+          <Phone className="w-4 h-4" />
+          +7 (775) 504 91 24
+        </a>
+        <a
+          href="mailto:suleon_auto@gmail.com"
+          className="flex items-center gap-2 text-blue-500 hover:text-blue-400 transition-colors"
+        >
+          <Mail className="w-4 h-4" />
+          suleon_auto@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+</motion.div>
+
   );
 };
 
