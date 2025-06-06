@@ -9,21 +9,25 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export default function ImageGallery({ car }: { car: Car }) {
 
-
+    if (!car.gallery_images || !Array.isArray(car.gallery_images.gallery) || car.gallery_images.gallery.length === 0) {
+  return null; // или <div>Нет изображений</div>
+}
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
 
       const handlePrevImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === 0 ? car.images.gallery.length - 1 : prev - 1
+      prev === 0 ? car.gallery_images.gallery.length - 1 : prev - 1
     );
   };
 
   const handleNextImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === car.images.gallery.length - 1 ? 0 : prev + 1
+      prev === car.gallery_images.gallery.length - 1 ? 0 : prev + 1
     );
   };
+
+
 
 
     return (
@@ -33,7 +37,7 @@ export default function ImageGallery({ car }: { car: Car }) {
             {/* Main Image */}
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-100">
               <Image
-                src={car.images.gallery[currentImageIndex]}
+                src={car.gallery_images.gallery[currentImageIndex]}
                 alt={`${car.brand} ${car.model}`}
                 fill
                 className="object-cover"
@@ -41,7 +45,7 @@ export default function ImageGallery({ car }: { car: Car }) {
               />
 
               {/* Navigation arrows */}
-              {car.images.gallery.length > 1 && (
+              {car.gallery_images.gallery.length > 1 && (
                 <>
                   <button
                     onClick={handlePrevImage}
@@ -60,14 +64,14 @@ export default function ImageGallery({ car }: { car: Car }) {
 
               {/* Image counter */}
               <div className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
-                {currentImageIndex + 1} / {car.images.gallery.length}
+                {currentImageIndex + 1} / {car.gallery_images.gallery.length}
               </div>
             </div>
 
             {/* Thumbnail Gallery */}
-            {car.images.gallery.length > 1 && (
+            {car.gallery_images.gallery.length > 1 && (
               <div className="grid grid-cols-4 gap-2">
-                {car.images.gallery.slice(0, 8).map((image, index) => (
+                {car.gallery_images.gallery.slice(0, 8).map((image, index) => (
                   <button
                     key={image}
                     onClick={() => setCurrentImageIndex(index)}
