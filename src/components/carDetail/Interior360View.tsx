@@ -3,7 +3,15 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-export default function Interior360View() {
+type Interior360ViewProps = {
+  image: string;
+  link: string;
+};
+
+
+export default function Interior360View({ image, link }: Interior360ViewProps) {
+
+
   const [isOpen, setIsOpen] = useState(false);
 
 
@@ -26,7 +34,7 @@ export default function Interior360View() {
       <div className="relative">
         <Image
           // src="/images/byd-sealion07/zorobzor.jpeg"
-          src="/img1.jpg"
+          src={image}
           alt="Электромобиль BYD Sea Lion 07 360"
           title="Электромобиль BYD Sea Lion 07 360"
           width={1920}
@@ -72,7 +80,7 @@ export default function Interior360View() {
             </button>
             <iframe
             //   src="https://momento360.com/e/u/your-embed-id"
-              src="https://m.dcdapp.com/motor/inapp/pano-new/inner.html?series_id=280"
+              src={link}
               className="w-full h-full pointer-events-auto"
               width="100%"
               height="100%"
