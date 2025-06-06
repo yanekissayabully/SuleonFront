@@ -335,12 +335,38 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
           </Tabs>
         </div>
 
-        {car.imageUrls && <Viewer360 images={car.imageUrls} autoPlay={false} speed={110} />}
+        {/* {car.imageUrls && <Viewer360 images={car.imageUrls} autoPlay={false} speed={110} />}
 
-        {/* 360 View */}
         {car.view && <Interior360View
           image = {car.view.image} link={car.view.link}
-        />}
+        />} */}
+        {/* НОВЫЕ табы для 360º обзор */}
+<div className="mt-16">
+  <Tabs defaultValue="exterior" className="w-full">
+    <TabsList className="grid w-full grid-cols-2">
+      <TabsTrigger value="exterior">360º Внешний Вид</TabsTrigger>
+      <TabsTrigger value="interior">360º Интерьер</TabsTrigger>
+    </TabsList>
+
+    <TabsContent value="exterior" className="mt-8">
+      {car.imageUrls && (
+        <Viewer360 images={car.imageUrls} autoPlay={false} speed={110} />
+      )}
+    </TabsContent>
+
+    <TabsContent value="interior" className="mt-8">
+      {car.view && (
+        <Interior360View
+          image={car.view.image}
+          link={car.view.link}
+        />
+      )}
+    </TabsContent>
+  </Tabs>
+</div>
+
+
+
         {/* Contact Form */}
         <div className="mt-16" id="contact-form">
           <ContactForm

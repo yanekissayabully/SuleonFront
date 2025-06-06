@@ -30,9 +30,10 @@ const Viewer360: React.FC<Viewer360Props> = ({ images, autoPlay = true, speed = 
   };
 
   const handleStart = (e: MouseEvent | TouchEvent) => {
+    e.preventDefault();
     isDragging.current = true;
     startX.current = getClientX(e);
-    setIsPlaying(false);
+    setIsPlaying(false); // При начале перетаскивания — стопаем
   };
 
   const handleMove = (e: MouseEvent | TouchEvent) => {
@@ -40,8 +41,10 @@ const Viewer360: React.FC<Viewer360Props> = ({ images, autoPlay = true, speed = 
     const clientX = getClientX(e);
     const dx = clientX - startX.current;
 
-    if (Math.abs(dx) > 5) {
-      const newIndex = (currentIndex + (dx > 0 ? -1 : 1) + frameCount) % frameCount;
+    const sensitivity = 5; // Можно регулировать скорость смены
+    if (Math.abs(dx) >= sensitivity) {
+      const steps = Math.floor(dx / sensitivity);
+      const newIndex = (currentIndex - steps + frameCount) % frameCount;
       setCurrentIndex(newIndex);
       startX.current = clientX;
     }
@@ -55,30 +58,21 @@ const Viewer360: React.FC<Viewer360Props> = ({ images, autoPlay = true, speed = 
     const container = containerRef.current;
     if (!container) return;
 
-    const onMouseDown = (e: MouseEvent) => handleStart(e);
-    const onTouchStart = (e: TouchEvent) => handleStart(e);
-    const onMouseMove = (e: MouseEvent) => handleMove(e);
-    const onTouchMove = (e: TouchEvent) => handleMove(e);
-    const onMouseUp = () => handleEnd();
-    const onTouchEnd = () => handleEnd();
+    container.addEventListener('mousedown', handleStart);
+    container.addEventListener('touchstart', handleStart, { passive: false });
 
-    // Только старт на контейнере
-    container.addEventListener('mousedown', onMouseDown);
-    container.addEventListener('touchstart', onTouchStart, { passive: true });
-
-    // Движение и завершение — глобально
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('touchmove', onTouchMove, { passive: true });
-    window.addEventListener('mouseup', onMouseUp);
-    window.addEventListener('touchend', onTouchEnd);
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('touchmove', handleMove, { passive: false });
+    window.addEventListener('mouseup', handleEnd);
+    window.addEventListener('touchend', handleEnd);
 
     return () => {
-      container.removeEventListener('mousedown', onMouseDown);
-      container.removeEventListener('touchstart', onTouchStart);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('touchmove', onTouchMove);
-      window.removeEventListener('mouseup', onMouseUp);
-      window.removeEventListener('touchend', onTouchEnd);
+      container.removeEventListener('mousedown', handleStart);
+      container.removeEventListener('touchstart', handleStart);
+      window.removeEventListener('mousemove', handleMove);
+      window.removeEventListener('touchmove', handleMove);
+      window.removeEventListener('mouseup', handleEnd);
+      window.removeEventListener('touchend', handleEnd);
     };
   }, [currentIndex]);
 
@@ -105,29 +99,31 @@ const Viewer360: React.FC<Viewer360Props> = ({ images, autoPlay = true, speed = 
   }, [isPlaying, speed, frameCount]);
 
   return (
-    <div className="relative w-full max-w-xl mx-auto select-none">
-      <div className="absolute top-2 left-2 z-10">
-        <img src="/icons/icons-360.png" alt="360" width={32} height={24} />
+    <div className="relative w-full max-w-3xl mx-auto select-none">
+      {/* Иконка 360 */}
+      <div className="absolute top-4 left-4 z-10 bg-white rounded-full p-2 shadow">
+        <img src="/icons/icons-360.png" alt="360" width={32} height={32} />
       </div>
 
-      <div ref={containerRef} className="w-full h-auto cursor-ew-resize">
+      {/* Само изображение */}
+      <div ref={containerRef} className="w-full h-auto cursor-grab active:cursor-grabbing">
         <img
           src={images[currentIndex]}
           alt="360 view"
-          className="w-full h-auto object-contain"
+          className="w-full h-auto object-contain rounded-lg shadow"
+          draggable={false}
         />
       </div>
 
+      {/* Кнопка Play/Pause */}
       <button
         onClick={() => setIsPlaying((prev) => !prev)}
-        className="absolute bottom-2 right-2 bg-black text-white text-sm px-3 py-1 rounded"
+        className="absolute bottom-4 right-4 bg-black bg-opacity-70 hover:bg-opacity-90 text-white text-sm px-4 py-2 rounded-full transition"
       >
-        {isPlaying ? 'Pause' : 'Play'}
+        {isPlaying ? 'Пауза' : 'Воспроизвести'}
       </button>
     </div>
   );
 };
 
 export default Viewer360;
-
-
