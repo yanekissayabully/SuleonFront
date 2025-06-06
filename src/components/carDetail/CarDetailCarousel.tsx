@@ -14,25 +14,9 @@ interface Slide {
   description: string;
 }
 
-const slides: Slide[] = [
-  {
-    image: '/img1.jpg',
-    title: 'Новый интерьер: Ритм океана',
-    description: 'Откройте для себя новое пространство, наполненное ощущением красоты и свободы. Интерьер созданный для максимального комфорта и наслаждения, отражающий гармонию и свежесть волн океана.',
-  },
-  {
-    image: '/img2.webp',
-    title: 'Интеллектуальная система BYD',
-    description: 'Система, которая связывает людей, автомобили и жизнь. Просто скажите "Hi BYD".',
-  },
-  {
-    image: '/img3.webp',
-    title: 'Понорамная крыша',
-    description: 'Панорамная крыша BYD Song Plus предлагает широкий обзор и делает салон более светлым и просторным. Эта особенность добавляет элегантности и комфорта, улучшая общее впечатление от поездки.',
-  },
-];
 
-export const CarDetailCarousel = () => {
+
+export const CarDetailCarousel = ({ slides }: { slides: Slide[] }) => {
   return (
     <div className="w-full py-12">
       <Swiper
