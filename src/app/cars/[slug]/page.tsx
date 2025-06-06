@@ -1,10 +1,7 @@
-// "use client";
-
 import React from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { CarDetailCarousel } from "@/components/carDetail/CarDetailCarousel";
 import { PromoBanner } from "@/components/carDetail/PromoBanner";
 import {
@@ -14,8 +11,6 @@ import {
   Gauge,
   Car as CarIcon,
   Users,
-  // Fuel,
-  // Calendar,
   Settings,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -31,27 +26,19 @@ import ImageGallery from "./ImageGallery";
 import CarVideo from "./CarVideo";
 import QuickActions from "./QuickActions";
 import MediaContent from "./MediaContent";
+import { get } from "http";
 
 
 
 interface CarDetailPageProps {
-  // params: Promise<{ slug: string }>;
   params: { slug: string };
 }
 
 
 
 export default async function CarDetailPage({ params }: CarDetailPageProps) {
-  // const resolvedParams = React.use(params);
-  const car = //await fetchCarBySlug(resolvedParams.slug) || 
-  getCarBySlug(params.slug);
-
-
-  // const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  // const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  // const [isFavorite, setIsFavorite] = useState(false);
-
-  // Get slug from params - use React.use for async params
+  // const car = getCarBySlug(params.slug);
+  const car = await fetchCarBySlug(params.slug);
 
   
 
@@ -63,17 +50,6 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
     .filter((c) => c.id !== car.id && c.brand === car.brand)
     .slice(0, 3);
 
-  // const handlePrevImage = () => {
-  //   setCurrentImageIndex((prev) =>
-  //     prev === 0 ? car.images.gallery.length - 1 : prev - 1
-  //   );
-  // };
-
-  // const handleNextImage = () => {
-  //   setCurrentImageIndex((prev) =>
-  //     prev === car.images.gallery.length - 1 ? 0 : prev + 1
-  //   );
-  // };
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -101,31 +77,6 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
   };
 
 
-
-
-  //   const content = [
-  //   {
-  //     type: "image",
-  //     media: "/фары.jpg",
-  //     title: "Фары, вдохновлённые отблесками океана",
-  //     text: `Двойные U-образные фары BYD Song Plus сверкают, словно отражение солнца...`,
-  //   },
-  //   {
-  //     type: "video",
-  //     media: "/видосBYD.mp4",
-  //     title: "Фары, вдохновлённые отблесками океана",
-  //     text: `Двойные U-образные фары BYD Song Plus сверкают, словно отражение солнца...`,
-  //   },
-  //   {
-  //     type: "image",
-  //     media: "/перед.jpg",
-  //     title: "OCEAN X FACE",
-  //     text: `Эволюционное сочетание футуристических линий и морских мотивов рождает...`,
-  //   },
-  // ];
-
-
-    
 
   return (
     <div className="min-h-screen bg-white">
@@ -159,7 +110,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           
-          <ImageGallery car={car} />
+          {car.gallery_images && <ImageGallery car={car} />}
 
           {/* Car Details */}
           <div className="space-y-6">
@@ -197,10 +148,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
                     {formatPriceUAH(car.price.tg)}
                   </div>
                 </div>
-                {/* <div className="text-right">
-                  <div className="text-sm text-gray-500 mb-1">Кредит от</div>
-                  <div className="text-2xl font-bold text-blue-600">0,01%</div>
-                </div> */}
+
               </div>
 
               <div className="grid grid-cols-2 gap-3">

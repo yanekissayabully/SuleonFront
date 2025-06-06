@@ -47,7 +47,7 @@ const formatPriceTenge = (price: number) => {
       <div className="relative aspect-[4/3] overflow-hidden">
         <Link href={`/cars/${car.slug}`}>
           <Image
-            src={car.images.gallery[currentImageIndex] || car.images.main}
+            src={car.gallery_images.gallery[currentImageIndex] || car.gallery_images.main}
             alt={`${car.brand} ${car.model}`}
             fill
             className="object-cover transition-transform duration-300 hover:scale-105"
