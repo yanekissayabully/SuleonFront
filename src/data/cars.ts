@@ -8,7 +8,7 @@ export interface Car {
     usd: number;
     tg: number;
   };
-  images: {
+  gallery_images: {
     main: string;
     gallery: string[];
   };
@@ -57,7 +57,7 @@ export const cars: Car[] = [
       usd: 23200,
       tg: 11872000,
     },
-    images: {
+    gallery_images: {
       main: "https://ext.same-assets.com/2335176788/2497154989.webp",
       gallery: [
         "https://ext.same-assets.com/2335176788/2497154989.webp",
@@ -202,7 +202,7 @@ export const cars: Car[] = [
       usd: 28100,
       tg: 14379000,
     },
-    images: {
+    gallery_images: {
       main: "https://ext.same-assets.com/2335176788/3966025567.webp",
       gallery: [
         "https://ext.same-assets.com/2335176788/3966025567.webp",
@@ -248,7 +248,7 @@ export const cars: Car[] = [
       usd: 24300,
       tg: 12435000,
     },
-    images: {
+    gallery_images: {
       main: "https://ext.same-assets.com/2335176788/4289580409.webp",
       gallery: [
         "https://ext.same-assets.com/2335176788/4289580409.webp",
@@ -294,7 +294,7 @@ export const cars: Car[] = [
       usd: 34100,
       tg: 17449000,
     },
-    images: {
+    gallery_images: {
       main: "https://ext.same-assets.com/2335176788/1072199648.webp",
       gallery: [
         "https://ext.same-assets.com/2335176788/1072199648.webp",
@@ -340,7 +340,7 @@ export const cars: Car[] = [
       usd: 33200,
       tg: 16989000,
     },
-    images: {
+    gallery_images: {
       main: "https://ext.same-assets.com/2335176788/1113055233.svg",
       gallery: ["https://ext.same-assets.com/2335176788/1113055233.svg"],
     },
@@ -383,7 +383,7 @@ export const cars: Car[] = [
       usd: 16500,
       tg: 8443000,
     },
-    images: {
+    gallery_images: {
       main: "https://ext.same-assets.com/2335176788/266031571.webp",
       gallery: ["https://ext.same-assets.com/2335176788/266031571.webp"],
     },
