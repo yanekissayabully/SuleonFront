@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-export const PromoBanner = () => {
+export const PromoBanner = ({ lastImage }: { lastImage?: string }) => {
   const handleClick = () => {
     const form = document.getElementById('contact-form');
     if (form) {
@@ -14,11 +14,20 @@ export const PromoBanner = () => {
     <div className="relative w-full h-[500px]">
       {/* Фон */}
       <div className="absolute inset-0">
-        <img
-          src="/last.jpg" // замени на свой путь
-          alt="Тест-драйв"
-          className="w-full h-full object-cover"
-        />
+        {lastImage && (
+          <img
+            src={lastImage}
+            alt="Тест-драйв"
+            className="w-full h-full object-cover"
+          />
+        )}
+        {!lastImage && (
+          <img
+            src={'/last.jpg'}
+            alt="Тест-драйв"
+            className="w-full h-full object-cover"
+          />
+        )}
         <div className="absolute inset-0 bg-black bg-opacity-50" />
       </div>
 

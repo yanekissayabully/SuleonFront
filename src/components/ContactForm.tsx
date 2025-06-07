@@ -372,7 +372,7 @@ const ContactForm = ({
   const slug = params?.slug; // `byd-song-plus` например
 
   const selectedCar = cars.find((car) => car.slug === slug);
-  const backgroundImage = selectedCar?.images.main || "";
+  const backgroundImage = selectedCar?.gallery_images.main || "";
 
   if (isSubmitted) {
     return (
