@@ -70,7 +70,7 @@ const Footer = () => {
           <div className="lg:col-span-1">
 <Link href="/" className="inline-block mb-6">
   <Image
-    src="/icons/suleon.svg"
+    src="/icons/LOGOO.svg"
     alt="SuleonAuto"
     width={150}
     height={50}
@@ -144,7 +144,7 @@ const Footer = () => {
           </div>
 
           {/* Car Brands */}
-          <div className="lg:col-span-1">
+          {/* <div className="lg:col-span-1">
             <h3 className="text-lg font-semibold mb-6">Бренды</h3>
             <div className="flex flex-wrap gap-2">
               {carBrands.map((brand) => (
@@ -157,7 +157,7 @@ const Footer = () => {
                 </Link>
               ))}
             </div>
-          </div>
+          </div> */}
 
           {/* Locations */}
           <div className="lg:col-span-1">

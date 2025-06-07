@@ -274,17 +274,17 @@
 // export default ContactForm;
 
 
-"use client"; // если ты в app/ структуре
+"use client"; 
 
 import { useState } from "react";
-import { useParams } from "next/navigation"; // Если ты в app/router (Next.js 13/14)
+import { useParams } from "next/navigation"; 
 import { motion } from "framer-motion";
 import { Send, Phone, Mail, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { cars } from "@/data/cars"; // ⚠️ Подгони путь к своим тачкам
+import { cars } from "@/data/cars"; 
 
 interface ContactFormProps {
   title?: string;
@@ -372,7 +372,7 @@ const ContactForm = ({
   const slug = params?.slug; // `byd-song-plus` например
 
   const selectedCar = cars.find((car) => car.slug === slug);
-  const backgroundImage = selectedCar?.images.main || "";
+  const backgroundImage = selectedCar?.gallery_images.main || "";
 
   if (isSubmitted) {
     return (
@@ -399,23 +399,24 @@ const ContactForm = ({
 
   return (
     <motion.div
-  className={`relative overflow-hidden rounded-2xl p-8 ${className}`}
+className={`relative overflow-hidden rounded-2xl p-8 ${className}`}
   style={{
     backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
+    backgroundSize: backgroundImage ? "cover" : undefined,
+    backgroundPosition: backgroundImage ? "center" : undefined,
+    backgroundRepeat: backgroundImage ? "no-repeat" : undefined,
+    backgroundColor: backgroundImage ? undefined : "#1e3a8a", // Синий фон
   }}
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.3 }}
 >
-  {/* Оверлей с мягким затемнением */}
+  {/* Оверлей только если есть картинка */}
   {backgroundImage && (
     <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-0"></div>
   )}
 
-  {/* Сама форма */}
+  {/* Форма */}
   <div className="relative z-10 bg-white/20 backdrop-blur-lg border border-white/30 rounded-2xl shadow-xl p-8 text-white max-w-2xl mx-auto">
     <div className="text-center mb-8">
       <h3 className="text-3xl font-semibold mb-2">{title}</h3>
@@ -439,7 +440,7 @@ const ContactForm = ({
             value={formData.name}
             onChange={handleInputChange}
             placeholder="Ваше имя"
-            className="w-full bg-white/10 border-white/20 placeholder-white/60 text-white"
+            className="w-full bg-white/10 border-white/20 text-white placeholder:opacity-100 placeholder:text-gray-200"
           />
         </div>
 
@@ -458,7 +459,7 @@ const ContactForm = ({
             value={formData.phone}
             onChange={handleInputChange}
             placeholder="+7 (777) 777 77 77"
-            className="w-full bg-white/10 border-white/20 placeholder-white/60 text-white"
+            className="w-full bg-white/10 border-white/20 text-white placeholder:opacity-100 placeholder:text-gray-200"
           />
         </div>
       </div>
@@ -477,7 +478,7 @@ const ContactForm = ({
           value={formData.email}
           onChange={handleInputChange}
           placeholder="your@email.com"
-          className="w-full bg-white/10 border-white/20 placeholder-white/60 text-white"
+          className="w-full bg-white/10 border-white/20 text-white placeholder:opacity-100 placeholder:text-gray-200"
         />
       </div>
 
@@ -519,7 +520,7 @@ const ContactForm = ({
           value={formData.message}
           onChange={handleInputChange}
           placeholder="Ваши вопросы или пожелания..."
-          className="w-full bg-white/10 border-white/20 placeholder-white/60 text-white"
+          className="w-full bg-white/10 border-white/20 text-white placeholder:opacity-100 placeholder:text-gray-200"
         />
       </div>
 
