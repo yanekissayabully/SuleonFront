@@ -166,7 +166,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
                   <QuickActions />
 
             {/* Color Options */}
-            {car.colors && car.colors.length > 1 && (
+            {car.colors && car.colors.length >= 1 && (
               <div>
                 <h3 className="font-semibold mb-3">Доступные цвета:</h3>
                 <div className="flex gap-3">
@@ -326,7 +326,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
         <MediaContent car={car} />
 
         {car.slides && <CarDetailCarousel slides={car.slides} />}
-        <PromoBanner />
+        <PromoBanner lastImage={car.last_image}/>
 
         {/* Related Cars */}
         {relatedCars.length > 0 && (

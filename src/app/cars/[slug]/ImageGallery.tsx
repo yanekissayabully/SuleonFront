@@ -73,7 +73,7 @@ export default function ImageGallery({ car }: { car: Car }) {
               <div className="grid grid-cols-4 gap-2">
                 {car.gallery_images.gallery.slice(0, 8).map((image, index) => (
                   <button
-                    key={image}
+                    key={`${image}-${index}`}
                     onClick={() => setCurrentImageIndex(index)}
                     className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
                       currentImageIndex === index
