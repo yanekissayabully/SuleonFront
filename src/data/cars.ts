@@ -44,6 +44,7 @@ export interface Car {
     image: string;
     link: string;
   }; // Object with image and link for 360 view (optional)
+  last_image?: string; // Last image URL (optional)
 }
 
 export const cars: Car[] = [
@@ -190,7 +191,7 @@ export const cars: Car[] = [
     view: {
       image: "/img1.jpg",
       link: "https://m.dcdapp.com/motor/inapp/pano-new/inner.html?series_id=280",
-    },
+    }
   },
   {
     id: "2",
