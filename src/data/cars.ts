@@ -8,9 +8,14 @@ export interface Car {
     usd: number;
     tg: number;
   };
+  
   gallery_images: {
     main: string;
     gallery: string[];
+    exterior?: string[];
+    interior?: string[];
+    promo?: string[];
+    video?: string[];
   };
   description: string;
   specs: {
@@ -68,6 +73,22 @@ export const cars: Car[] = [
         "https://ext.same-assets.com/3124690321/1494461349.webp",
         "https://ext.same-assets.com/3124690321/1225119392.webp",
       ],
+      exterior: [
+        "https://ext.same-assets.com/2335176788/2497154989.webp",
+        "https://ext.same-assets.com/2335176788/675530518.webp",
+      ],
+            interior: [
+        "https://ext.same-assets.com/2335176788/2497154989.webp",
+        "https://ext.same-assets.com/2335176788/675530518.webp",
+      ],
+            promo: [
+        "https://ext.same-assets.com/2335176788/2497154989.webp",
+        "https://ext.same-assets.com/2335176788/675530518.webp",
+      ],
+            video: [
+        "https://ext.same-assets.com/2335176788/2497154989.webp",
+        "https://ext.same-assets.com/2335176788/675530518.webp",
+      ]
     },
     description:
       "Электрический кроссовер, который сочетает в себе передовые технологии и комфорт. BYD Song Plus представляет новое поколение электромобилей с впечатляющим запасом хода.",

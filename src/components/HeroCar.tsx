@@ -12,27 +12,28 @@ interface HeroCarProps {
       tg: number;
     };
     gallery_images: {
-      main: string;
-    };
+      image: string;
+      image_type: string;
+    }[];
   };
 }
 
 const HeroCar = ({ car }: HeroCarProps) => {
   const formatPrice = (num: number) => num.toLocaleString("en-US");
 
+  // Тут вытащим ПЕРВУЮ ФОТКУ (или дефолт заглушку если нет)
+  const mainImage = car.gallery_images?.[0]?.image || "/placeholder.jpg";
+
   return (
     <section className="relative w-full h-[75vh] flex items-end justify-start overflow-hidden">
-      {/* Фотка */}
       <Image
-        src={car.gallery_images.main}
+        src={mainImage}
         alt={`${car.brand} ${car.model}`}
         fill
         className="object-cover object-center"
         priority
       />
-      {/* Затемнение как у ncars */}
       <div className="absolute inset-0 bg-gradient-to-t from-white/10 via-white/0 to-white/0" />
-      {/* Контент */}
       <div className="absolute bottom-6 left-6 z-10 text-white">
         <h1 className="text-3xl md:text-5xl font-bold leading-tight">
           {`${car.brand} ${car.model}`}
@@ -40,13 +41,6 @@ const HeroCar = ({ car }: HeroCarProps) => {
         <p className="text-xl md:text-2xl mt-2 mb-6">
           от ${formatPrice(car.price.usd)} ({formatPrice(car.price.tg)} ₸)
         </p>
-        {/* <div className="flex flex-wrap gap-3">
-          <Button variant="secondary" size="lg" asChild>
-            <a href="tel:+77775553322">Позвонить</a>
-          </Button>
-          <Button variant="secondary" size="lg">Тест-Драйв</Button>
-          <Button variant="secondary" size="lg">Трейд-ин</Button>
-        </div> */}
       </div>
     </section>
   );
