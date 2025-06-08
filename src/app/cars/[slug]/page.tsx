@@ -29,6 +29,8 @@ import MediaContent from "./MediaContent";
 import { get } from "http";
 import HeroCar from "@/components/HeroCar";
 import CarDetails from "@/components/carDetail/CarDetails";
+import SimpleContactForm from "@/components/ui/SimpleForm";
+import CarTrimList from "@/components/carDetail/CarTrims";
 
 
 
@@ -150,6 +152,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
     </TabsContent>
   </Tabs>
 </div>
+<CarTrimList />
         {/* Tabs Section */}
         <div className="mt-16">
           <Tabs defaultValue="specs" className="w-full">
@@ -263,6 +266,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
         {car.slides && <CarDetailCarousel slides={car.slides} />}
         <PromoBanner lastImage={car.last_image}/>
 
+          <SimpleContactForm/>
         {/* Related Cars */}
         {relatedCars.length > 0 && (
           <div className="mt-16">

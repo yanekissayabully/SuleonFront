@@ -67,7 +67,18 @@ const CarDetails = ({ car, formatPrice, formatPriceUAH }: CarDetailsProps) => {
       </div>
 
       {/* Quick Actions */}
-      <QuickActions />
+      <QuickActions car={{
+  id: car.id,
+  slug: car.slug,
+  brand: car.brand,
+  model: car.model,
+  main_image: car.main_image,
+  price: {
+    usd: car.price.usd,
+  }
+}} />
+
+
 
       {/* Color Options */}
       {car.colors && car.colors.length >= 1 && (

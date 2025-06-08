@@ -184,16 +184,15 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const mainNavigation = [
-    { name: "Модели", href: "/models" },
-    { name: "Аксессуары", href: "/accessories" },
-    { name: "Зарядные устройства", href: "/chargers" },
+    { name: "Каталог автомобилей", href: "/models" },
+    { name: "Запчасти и Аксессуары", href: "/accessories" },
+    { name: "Трейд Ин и выкуп", href: "/tradein" },
     { name: "Сервис", href: "/service" },
   ];
 
   const dropdownNavigation = [
-    { name: "Гибридные автомобили", href: "/hybrids" },
-    { name: "Коммерческий транспорт", href: "/commercial" },
-    { name: "Блог", href: "/blog" },
+    { name: "Отзывы", href: "/reports" },
+    { name: "Блог и медиа", href: "/blog" },
     { name: "О нас", href: "/about" },
   ];
 
