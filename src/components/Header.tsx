@@ -191,6 +191,7 @@ const Header = () => {
   ];
 
   const dropdownNavigation = [
+    { name: "Избранное", href: "/favorite"},
     { name: "Отзывы", href: "/reports" },
     { name: "Блог и медиа", href: "/blog" },
     { name: "О нас", href: "/about" },
