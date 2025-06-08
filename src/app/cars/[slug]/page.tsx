@@ -27,6 +27,7 @@ import CarVideo from "./CarVideo";
 import QuickActions from "./QuickActions";
 import MediaContent from "./MediaContent";
 import { get } from "http";
+import HeroCar from "@/components/HeroCar";
 
 
 
@@ -79,9 +80,9 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
 
 
   return (
+    
     <div className="min-h-screen bg-white">
-      {/* Breadcrumb */}
-      <div className="bg-gray-50 py-4">
+            <div className="bg-gray-50 py-4">
         <div className="container mx-auto px-4">
           <nav className="flex items-center gap-2 text-sm text-gray-600">
             <Link href="/" className="hover:text-blue-600 transition-colors">
@@ -106,11 +107,16 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
           </nav>
         </div>
       </div>
+      
+      <HeroCar car={car} />
+      
+
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           
           {car.gallery_images && <ImageGallery car={car} />}
+
 
           {/* Car Details */}
           <div className="space-y-6">
@@ -168,7 +174,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
             {/* Color Options */}
             {car.colors && car.colors.length >= 1 && (
               <div>
-                <h3 className="font-semibold mb-3">Доступные цвета:</h3>
+                <h3 className="font-semibold mb-3">Возможные цвета:</h3>
                 <div className="flex gap-3">
                   {car.colors.map((color) => (
                     <div key={color.name} className="text-center">
@@ -191,7 +197,30 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
             )}
           </div>
         </div>
+                    {/* НОВЫЕ табы для 360º обзор */}
+<div className="mt-16">
+  <Tabs defaultValue="exterior" className="w-full">
+    <TabsList className="grid w-full grid-cols-2">
+      <TabsTrigger value="exterior">360º Внешний Вид</TabsTrigger>
+      <TabsTrigger value="interior">360º Интерьер</TabsTrigger>
+    </TabsList>
 
+    <TabsContent value="exterior" className="mt-8">
+      {car.imageUrls && (
+        <Viewer360 images={car.imageUrls} autoPlay={false} speed={110} />
+      )}
+    </TabsContent>
+
+    <TabsContent value="interior" className="mt-8">
+      {car.view && (
+        <Interior360View
+          image={car.view.image}
+          link={car.view.link}
+        />
+      )}
+    </TabsContent>
+  </Tabs>
+</div>
         {/* Tabs Section */}
         <div className="mt-16">
           <Tabs defaultValue="specs" className="w-full">
@@ -289,29 +318,6 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
           image = {car.view.image} link={car.view.link}
         />} */}
         {/* НОВЫЕ табы для 360º обзор */}
-<div className="mt-16">
-  <Tabs defaultValue="exterior" className="w-full">
-    <TabsList className="grid w-full grid-cols-2">
-      <TabsTrigger value="exterior">360º Внешний Вид</TabsTrigger>
-      <TabsTrigger value="interior">360º Интерьер</TabsTrigger>
-    </TabsList>
-
-    <TabsContent value="exterior" className="mt-8">
-      {car.imageUrls && (
-        <Viewer360 images={car.imageUrls} autoPlay={false} speed={110} />
-      )}
-    </TabsContent>
-
-    <TabsContent value="interior" className="mt-8">
-      {car.view && (
-        <Interior360View
-          image={car.view.image}
-          link={car.view.link}
-        />
-      )}
-    </TabsContent>
-  </Tabs>
-</div>
 
 
 
