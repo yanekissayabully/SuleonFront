@@ -49,12 +49,12 @@ export default function ImageGallery({ car }: { car: Car }) {
   return (
     <div className="space-y-4">
       {/* Компактные кнопки табов */}
-      <div className="flex flex-wrap gap-1.5">
+      <div className="flex flex-wrap gap-2.5">
         {galleryTabs.map((tab) => (
           <button
             key={tab.key}
             onClick={() => handleTabChange(tab.key as any)}
-            className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
+            className={`px-2.5 py-1 rounded-md text-xm font-medium transition-colors ${
               currentTab === tab.key
                 ? "bg-blue-600 text-white shadow-sm"
                 : "bg-gray-100 text-gray-600 hover:bg-gray-200"

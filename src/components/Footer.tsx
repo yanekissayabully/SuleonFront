@@ -35,32 +35,31 @@ const Footer = () => {
   ];
 
   const quickLinks = [
-    { name: "Электромобили", href: "/models" },
-    { name: "Гибридные автомобили", href: "/hybrids" },
-    { name: "Коммерческий транспорт", href: "/commercial" },
-    { name: "Зарядные устройства", href: "/chargers" },
+    { name: "Каталог автомобилей", href: "/models" },
+    { name: "Запчасти и аксессуары", href: "/accessories" },
+    { name: "Трейд Ин и выкуп", href: "/tradein" },
     { name: "Сервис Suleon Auto", href: "/service" },
-    { name: "Тех. обслуживание", href: "/maintenance" },
-    { name: "Блог", href: "/blog" },
+    { name: "Отзывы", href: "/reports" },
+    { name: "Блог и медиа", href: "/blog" },
     { name: "О нас", href: "/about" },
   ];
 
-  const carBrands = [
-    "ZEEKR",
-    "BYD",
-    "Volkswagen",
-    "Nissan",
-    "Audi",
-    "Honda",
-    "BMW",
-    "Tesla",
-    "Mercedes-Benz",
-    "Xiaomi",
-    "NIO",
-    "Lotus",
-    "Polestar",
-    "Smart",
-  ];
+  // const carBrands = [
+  //   "ZEEKR",
+  //   "BYD",
+  //   "Volkswagen",
+  //   "Nissan",
+  //   "Audi",
+  //   "Honda",
+  //   "BMW",
+  //   "Tesla",
+  //   "Mercedes-Benz",
+  //   "Xiaomi",
+  //   "NIO",
+  //   "Lotus",
+  //   "Polestar",
+  //   "Smart",
+  // ];
 
   return (
     <footer className="bg-slate-900 text-white">

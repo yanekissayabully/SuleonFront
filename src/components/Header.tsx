@@ -185,7 +185,7 @@ const Header = () => {
 
   const mainNavigation = [
     { name: "Каталог автомобилей", href: "/models" },
-    { name: "Запчасти и Аксессуары", href: "/accessories" },
+    { name: "Запчасти и аксессуары", href: "/accessories" },
     { name: "Трейд Ин и выкуп", href: "/tradein" },
     { name: "Сервис", href: "/service" },
   ];
