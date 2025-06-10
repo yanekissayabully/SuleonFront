@@ -170,8 +170,8 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
       )}
     </TabsContent>
   </Tabs>
-</div>
-<CarTrimList />
+  </div>
+{car.trims && <CarTrimList trims={car.trims} />}
         {/* Tabs Section */}
         <div className="mt-16">
           <Tabs defaultValue="specs" className="w-full">

@@ -1,49 +1,59 @@
 "use client";
 
-import { useRef, useState, useEffect } from 'react';
-import Image from 'next/image';
+import { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 
-const carTrims = [
-  {
-    title: "520KM Luxury",
-    priceUsd: 22800,
-    priceTg: 945060,
-    features: [
-      "Базовая комплектация",
-      "Ёмкость батареи — 71,8 кВт·ч",
-      "Запас хода (CLTC) — 520 км",
-      "ABS, EBD/CBC, EBA/BA, TCS/ASR, ESP/DSC",
-      "Активная система оповещения безопасности",
-      "Активные тормоза",
-      "Система удержания полосы движения",
-    ],
-  },
-  {
-    title: "520KM Premium",
-    priceUsd: 24100,
-    priceTg: 998945,
-    features: [
-      "Дополнительные опции к комплектации 520KM Luxury",
-      "Руль с подогревом",
-      "Беспроводная зарядка мобильного телефона",
-      "Электропривод сидений первого ряда с подогревом и вентиляцией",
-      "15,6” мультимедиа",
-      "Многоцветная внутренняя подсветка салона",
-    ],
-  },
-  {
-    title: "605KM Flagship",
-    priceUsd: 24800,
-    priceTg: 1027960,
-    features: [
-      "Дополнительные опции к комплектации 520KM Premium",
-      "Ёмкость батареи — 87,04 кВт·ч",
-      "Запас хода (CLTC) — 605 км",
-    ],
-  },
-];
+interface CarTrim {
+  title: string;
+  price_usd: number;
+  price_tg: number;
+  features: string[];
+}
+interface CarTrimListProps {
+  trims: CarTrim[];
+}
 
-export default function CarTrimList() {
+// const carTrims: CarTrim[] = [
+//   {
+//     title: "520KM Luxury",
+//     priceUsd: 22800,
+//     priceTg: 945060,
+//     features: [
+//       "Базовая комплектация",
+//       "Ёмкость батареи — 71,8 кВт·ч",
+//       "Запас хода (CLTC) — 520 км",
+//       "ABS, EBD/CBC, EBA/BA, TCS/ASR, ESP/DSC",
+//       "Активная система оповещения безопасности",
+//       "Активные тормоза",
+//       "Система удержания полосы движения",
+//     ],
+//   },
+//   {
+//     title: "520KM Premium",
+//     priceUsd: 24100,
+//     priceTg: 998945,
+//     features: [
+//       "Дополнительные опции к комплектации 520KM Luxury",
+//       "Руль с подогревом",
+//       "Беспроводная зарядка мобильного телефона",
+//       "Электропривод сидений первого ряда с подогревом и вентиляцией",
+//       "15,6” мультимедиа",
+//       "Многоцветная внутренняя подсветка салона",
+//     ],
+//   },
+//   {
+//     title: "605KM Flagship",
+//     priceUsd: 24800,
+//     priceTg: 1027960,
+//     features: [
+//       "Дополнительные опции к комплектации 520KM Premium",
+//       "Ёмкость батареи — 87,04 кВт·ч",
+//       "Запас хода (CLTC) — 605 км",
+//     ],
+//   },
+// ];
+
+export default function CarTrimList({ trims }: CarTrimListProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -97,15 +107,17 @@ export default function CarTrimList() {
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    el.addEventListener('scroll', handleScroll);
-    return () => el.removeEventListener('scroll', handleScroll);
+    el.addEventListener("scroll", handleScroll);
+    return () => el.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <section className="container py-12">
-      <h2 className="text-3xl font-bold mb-8">Для предзаказа доступны 3 комплектации</h2>
+      <h2 className="text-3xl font-bold mb-8">
+        Для предзаказа доступны 3 комплектации
+      </h2>
 
-      <div 
+      <div
         ref={containerRef}
         className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-x-visible pb-4 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory scroll-smooth"
         onMouseDown={handleMouseDown}
@@ -116,11 +128,10 @@ export default function CarTrimList() {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         style={{}}
-
       >
-        {carTrims.map((trim, index) => (
-          <div 
-            key={index} 
+        {trims.map((trim, index) => (
+          <div
+            key={index}
             className="flex-none w-[85vw] md:w-auto border p-6 rounded-lg shadow-sm flex flex-col snap-center"
           >
             <Image
@@ -132,10 +143,16 @@ export default function CarTrimList() {
             />
             <h3 className="text-xl font-semibold mb-2">{trim.title}</h3>
             <div className="text-lg font-bold text-blue-700 mb-1">
-              ${trim.priceUsd.toLocaleString()}
+              {Number(trim.price_usd).toLocaleString("ru-RU", {
+                maximumFractionDigits: 0,
+              })}
+              $
             </div>
             <div className="text-gray-500 mb-4">
-              {trim.priceTg.toLocaleString()} ₸
+              {Number(trim.price_tg).toLocaleString("ru-RU", {
+                maximumFractionDigits: 0,
+              })}
+              ₸
             </div>
             <ul className="flex-1 mb-6 space-y-2 text-sm">
               {trim.features.map((feature, i) => (
@@ -151,11 +168,11 @@ export default function CarTrimList() {
 
       {/* Индикаторы */}
       <div className="flex justify-center gap-2 mt-4 md:hidden">
-        {carTrims.map((_, index) => (
-          <div 
+        {trims.map((_, index) => (
+          <div
             key={index}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === activeIndex ? 'bg-blue-600 w-4' : 'bg-gray-300'
+              index === activeIndex ? "bg-blue-600 w-4" : "bg-gray-300"
             }`}
           />
         ))}
