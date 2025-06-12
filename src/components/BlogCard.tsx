@@ -10,9 +10,10 @@ import { Badge } from '@/components/ui/badge';
 interface BlogCardProps {
   post: BlogPost;
   className?: string;
+  index?: number; // Optional index for animation delay
 }
 
-const BlogCard = ({ post, className = '' }: BlogCardProps) => {
+const BlogCard = ({ post, className = '', index }: BlogCardProps) => {
   const formatViews = (views: number) => {
     if (views >= 1000) {
       return `${Math.floor(views / 1000)}k`;
@@ -30,6 +31,12 @@ const BlogCard = ({ post, className = '' }: BlogCardProps) => {
   };
 
   return (
+    <motion.div
+              key={post.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: (index ?? 0) * 0.1 }}
+            >
     <motion.article
       className={`bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 ${className}`}
       whileHover={{ y: -4 }}
@@ -111,6 +118,7 @@ const BlogCard = ({ post, className = '' }: BlogCardProps) => {
         )}
       </div>
     </motion.article>
+    </motion.div>
   );
 };
 

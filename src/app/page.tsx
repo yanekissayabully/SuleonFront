@@ -21,6 +21,7 @@ import ContactForm from "@/components/ContactForm";
 import LocationMap from "@/components/Map";
 import { getFeaturedCars } from "@/data/cars";
 import { getFeaturedBlogPosts } from "@/data/blog";
+import LatestThreeBlogs from "@/components/LatestBlogSection";
 
 const HomePage = () => {
   const featuredCars = getFeaturedCars(6);
