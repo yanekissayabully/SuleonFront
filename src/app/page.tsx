@@ -22,6 +22,7 @@ import LocationMap from "@/components/Map";
 import { getFeaturedCars } from "@/data/cars";
 import { getFeaturedBlogPosts } from "@/data/blog";
 import LatestThreeBlogs from "@/components/LatestBlogSection";
+import BlogSection from "@/components/BlogSection";
 
 const HomePage = () => {
   const featuredCars = getFeaturedCars(6);
@@ -274,7 +275,7 @@ const HomePage = () => {
       </section>
 
       {/* Blog Section */}
-      <section className="py-16 bg-white">
+      {/* <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -315,7 +316,9 @@ const HomePage = () => {
             </Button>
           </div>
         </div>
-      </section>
+      </section> */}
+
+      <BlogSection />
 
       {/* Contact Section */}
       <section className="py-16 bg-gray-50">
