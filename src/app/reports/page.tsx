@@ -3,40 +3,26 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import clsx from 'clsx';
+import { useEffect, useState } from 'react';
+import { getPlatforms, Platform } from '@/lib/api/getPlatforms';
 
 export default function HighlightsPage() {
-  const platforms = [
-    {
-      name: 'YouTube',
-      href: 'https://youtube.com/@suleon_auto?si=4sAvG9STrLeTKvOL',
-      icon: '/icons/youtubeLogo.svg',
-      bg: 'bg-red-600',
-      description:
-        'Обзоры, интервью, тест-драйвы и разбор технологий — каждую неделю новое видео.',
-      preview: 'https://www.youtube.com/embed/gJ6w643Etv4',
-      orientation: 'horizontal',
-    },
-    {
-      name: 'Telegram',
-      href: 'https://t.me/suleonauto',
-      icon: '/icons/logoTG.svg',
-      bg: 'bg-blue-500',
-      description:
-        'Самые свежие новости, короткие видео и прямое общение с нашей командой.',
-      preview: '/previews/telegram.mp4',
-      orientation: 'horizontal',
-    },
-    {
-      name: 'Instagram',
-      href: 'https://www.instagram.com/suleon.auto/reels/',
-      icon: '/icons/instaLogo.svg',
-      bg: 'bg-pink-500',
-      description:
-        'Фото с мероприятий, закулисье, сторис и много визуального контента.',
-      preview: '/previews/instagram.mp4',
-      orientation: 'vertical',
-    },
-  ];
+  const [platforms, setPlatforms] = useState<Platform[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getPlatforms()
+      .then(setPlatforms)
+      .catch((err) => {
+        console.error('Ошибка загрузки платформ:', err);
+        setPlatforms([]);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return <div className="text-center mt-20 text-gray-600">Загрузка...</div>;
+  }
 
   return (
     <main className="min-h-screen bg-white py-20 px-6">
