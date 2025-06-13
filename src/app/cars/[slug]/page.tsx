@@ -111,14 +111,33 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
         </div>
       </div>
       
-      <HeroCar car={car} />
+      <HeroCar
+        car={{
+          ...car,
+          gallery_images: Array.isArray(car.gallery_images)
+            ? car.gallery_images
+            : Object.entries(car.gallery_images)
+                .flatMap(([type, images]) =>
+                  Array.isArray(images)
+                    ? images.map((img) => ({
+                        image: img,
+                        image_type: type,
+                      }))
+                    : typeof images === "string"
+                    ? [{ image: images, image_type: type }]
+                    : []
+                ),
+        }}
+      />
       
 
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           
-          {car.gallery_images && <ImageGallery car={car} />}
+            {Array.isArray(car.gallery_images) && car.gallery_images.length > 0 && (
+            <ImageGallery car={{ ...car, gallery_images: car.gallery_images }} />
+            )}
 
 
           {/* Car Details */}
@@ -151,8 +170,8 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
       )}
     </TabsContent>
   </Tabs>
-</div>
-<CarTrimList />
+  </div>
+{car.trims && <CarTrimList trims={car.trims} />}
         {/* Tabs Section */}
         <div className="mt-16">
           <Tabs defaultValue="specs" className="w-full">
