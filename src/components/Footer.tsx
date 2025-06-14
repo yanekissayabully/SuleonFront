@@ -35,6 +35,7 @@ const Footer = () => {
     { name: "Отзывы", href: "/reports" },
     { name: "Блог и медиа", href: "/blog" },
     { name: "О нас", href: "/about" },
+    { name: "Сравнение", href: "/compare" },
   ];
 
   return (
