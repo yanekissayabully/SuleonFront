@@ -558,42 +558,44 @@ export default function CarComparison() {
                         className="flex transition-transform duration-300 ease-out"
                         style={{ transform: `translateX(-${currentCarIndex * 100}%)` }}
                       >
-                        {selectedCarData.map((car) => (
-                          <div key={car.id} className="w-full flex-shrink-0 px-2">
-                            <div className="bg-white rounded-lg border border-gray-300 shadow-sm p-4">
-                              <div className="flex items-start gap-4">
-                                <img
-                                  src={car.image}
-                                  alt={car.name}
-                                  className="w-20 h-16 object-cover rounded-lg flex-shrink-0"
-                                />
-                                <div className="flex-1">
-                                  <div className="flex items-start justify-between">
-                                    <div>
-                                      <h3 className="font-bold text-lg text-gray-900">{car.name}</h3>
-                                      <div className="flex items-center gap-2 mb-1">
-                                        <div className="flex items-center">
-                                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                                          <span className="text-sm font-medium ml-1">{car.rating}</span>
+                        {selectedCarData.map((car) =>
+                          car ? (
+                            <div key={car.id} className="w-full flex-shrink-0 px-2">
+                              <div className="bg-white rounded-lg border border-gray-300 shadow-sm p-4">
+                                <div className="flex items-start gap-4">
+                                  <img
+                                    src={car.image}
+                                    alt={car.name}
+                                    className="w-20 h-16 object-cover rounded-lg flex-shrink-0"
+                                  />
+                                  <div className="flex-1">
+                                    <div className="flex items-start justify-between">
+                                      <div>
+                                        <h3 className="font-bold text-lg text-gray-900">{car.name}</h3>
+                                        <div className="flex items-center gap-2 mb-1">
+                                          <div className="flex items-center">
+                                            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                                            <span className="text-sm font-medium ml-1">{car.rating}</span>
+                                          </div>
+                                          <span className="text-sm text-gray-500">({car.reviews})</span>
                                         </div>
-                                        <span className="text-sm text-gray-500">({car.reviews})</span>
+                                        <p className="text-xl font-bold text-blue-600">${car.price.toLocaleString()}</p>
                                       </div>
-                                      <p className="text-xl font-bold text-blue-600">${car.price.toLocaleString()}</p>
+                                      <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() => setSelectedCars(selectedCars.filter(id => id !== car.id))}
+                                        className="p-1 h-auto text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+                                      >
+                                        <X className="h-4 w-4" />
+                                      </Button>
                                     </div>
-                                    <Button
-                                      variant="ghost"
-                                      size="sm"
-                                      onClick={() => setSelectedCars(selectedCars.filter(id => id !== car.id))}
-                                      className="p-1 h-auto text-gray-400 hover:text-gray-600 hover:bg-gray-100"
-                                    >
-                                      <X className="h-4 w-4" />
-                                    </Button>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          ) : null
+                        )}
                       </div>
                     </div>
                     
@@ -647,19 +649,23 @@ export default function CarComparison() {
                                 {spec.label}
                               </div>
                               {selectedCarData.map((car) => (
-                                <div key={car.id} className="text-center">
-                                  <span className="font-medium text-gray-900 text-sm">
-                                    {spec.key === 'safetyRating' ? 
-                                      `${car[spec.key as keyof CarSpec]}/5 ⭐` : 
-                                      spec.key === 'transmission' ?
-                                        (car[spec.key as keyof CarSpec] === 'Automatic' ? 'Автомат' :
-                                         car[spec.key as keyof CarSpec] === 'Manual' ? 'Механика' : 'CVT') :
-                                      spec.key === 'drivetrain' ?
-                                        (car[spec.key as keyof CarSpec] === 'AWD' ? 'Полный' :
-                                         car[spec.key as keyof CarSpec] === 'FWD' ? 'Передний' : 'Задний') :
-                                      car[spec.key as keyof CarSpec]}
-                                  </span>
-                                </div>
+                                car ? (
+                                  <div key={car.id} className="text-center">
+                                    <span className="font-medium text-gray-900 text-sm">
+                                      {car ? (
+                                        spec.key === 'safetyRating' ? 
+                                          `${car[spec.key as keyof CarSpec]}/5 ⭐` : 
+                                          spec.key === 'transmission' ?
+                                            (car[spec.key as keyof CarSpec] === 'Automatic' ? 'Автомат' :
+                                             car[spec.key as keyof CarSpec] === 'Manual' ? 'Механика' : 'CVT') :
+                                          spec.key === 'drivetrain' ?
+                                            (car[spec.key as keyof CarSpec] === 'AWD' ? 'Полный' :
+                                             car[spec.key as keyof CarSpec] === 'FWD' ? 'Передний' : 'Задний') :
+                                          car[spec.key as keyof CarSpec]
+                                      ) : null}
+                                    </span>
+                                  </div>
+                                ) : null
                               ))}
                             </div>
                           </div>
@@ -696,15 +702,17 @@ export default function CarComparison() {
                                     <span className="text-sm">{spec.label}</span>
                                   </div>
                                   <span className="font-medium text-gray-900 text-sm">
-                                    {spec.key === 'safetyRating' ? 
-                                      `${car[spec.key as keyof CarSpec]}/5 ⭐` : 
-                                      spec.key === 'transmission' ?
-                                        (car[spec.key as keyof CarSpec] === 'Automatic' ? 'Автомат' :
-                                         car[spec.key as keyof CarSpec] === 'Manual' ? 'Механика' : 'CVT') :
-                                      spec.key === 'drivetrain' ?
-                                        (car[spec.key as keyof CarSpec] === 'AWD' ? 'Полный' :
-                                         car[spec.key as keyof CarSpec] === 'FWD' ? 'Передний' : 'Задний') :
-                                      car[spec.key as keyof CarSpec]}
+                                    {car ? (
+                                      spec.key === 'safetyRating' ? 
+                                        `${car[spec.key as keyof CarSpec]}/5 ⭐` : 
+                                        spec.key === 'transmission' ?
+                                          (car[spec.key as keyof CarSpec] === 'Automatic' ? 'Автомат' :
+                                           car[spec.key as keyof CarSpec] === 'Manual' ? 'Механика' : 'CVT') :
+                                        spec.key === 'drivetrain' ?
+                                          (car[spec.key as keyof CarSpec] === 'AWD' ? 'Полный' :
+                                           car[spec.key as keyof CarSpec] === 'FWD' ? 'Передний' : 'Задний') :
+                                        car[spec.key as keyof CarSpec]
+                                    ) : null}
                                   </span>
                                 </div>
                               );
@@ -726,15 +734,17 @@ export default function CarComparison() {
                     <div className="hidden lg:block">
                       <div className="grid gap-4" style={{ gridTemplateColumns: `220px repeat(${selectedCarData.length}, 1fr)` }}>
                         <div className="font-medium text-gray-700 text-sm">Стандартные функции</div>
-                        {selectedCarData.map((car) => (
-                          <div key={car.id} className="space-y-2">
-                            {car.features.map((feature, index) => (
-                              <Badge key={index} variant="secondary" className="text-xs mr-1 mb-1 bg-blue-50 text-blue-700 border-blue-200">
-                                {feature}
-                              </Badge>
-                            ))}
-                          </div>
-                        ))}
+                        {selectedCarData.map((car) =>
+                          car ? (
+                            <div key={car.id} className="space-y-2">
+                              {car.features.map((feature, index) => (
+                                <Badge key={index} variant="secondary" className="text-xs mr-1 mb-1 bg-blue-50 text-blue-700 border-blue-200">
+                                  {feature}
+                                </Badge>
+                              ))}
+                            </div>
+                          ) : null
+                        )}
                       </div>
                     </div>
 
@@ -768,30 +778,34 @@ export default function CarComparison() {
                     <div className="hidden lg:block space-y-6">
                       <div className="grid gap-4" style={{ gridTemplateColumns: `220px repeat(${selectedCarData.length}, 1fr)` }}>
                         <div className="font-medium text-green-700 text-sm">Преимущества</div>
-                        {selectedCarData.map((car) => (
-                          <div key={car.id} className="space-y-2">
-                            {car.pros.map((pro, index) => (
-                              <div key={index} className="flex items-start gap-2 text-sm">
-                                <div className="w-2 h-2 bg-green-500 rounded-full mt-1.5 flex-shrink-0"></div>
-                                <span className="text-green-700">{pro}</span>
-                              </div>
-                            ))}
-                          </div>
-                        ))}
+                        {selectedCarData.map((car) =>
+                          car ? (
+                            <div key={car.id} className="space-y-2">
+                              {car.pros.map((pro, index) => (
+                                <div key={index} className="flex items-start gap-2 text-sm">
+                                  <div className="w-2 h-2 bg-green-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                                  <span className="text-green-700">{pro}</span>
+                                </div>
+                              ))}
+                            </div>
+                          ) : null
+                        )}
                       </div>
                       <Separator />
                       <div className="grid gap-4" style={{ gridTemplateColumns: `220px repeat(${selectedCarData.length}, 1fr)` }}>
                         <div className="font-medium text-red-700 text-sm">Недостатки</div>
-                        {selectedCarData.map((car) => (
-                          <div key={car.id} className="space-y-2">
-                            {car.cons.map((con, index) => (
-                              <div key={index} className="flex items-start gap-2 text-sm">
-                                <div className="w-2 h-2 bg-red-500 rounded-full mt-1.5 flex-shrink-0"></div>
-                                <span className="text-red-700">{con}</span>
-                              </div>
-                            ))}
-                          </div>
-                        ))}
+                        {selectedCarData.map((car) =>
+                          car ? (
+                            <div key={car.id} className="space-y-2">
+                              {car.cons.map((con, index) => (
+                                <div key={index} className="flex items-start gap-2 text-sm">
+                                  <div className="w-2 h-2 bg-red-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                                  <span className="text-red-700">{con}</span>
+                                </div>
+                              ))}
+                            </div>
+                          ) : null
+                        )}
                       </div>
                     </div>
 
