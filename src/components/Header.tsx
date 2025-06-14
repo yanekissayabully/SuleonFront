@@ -188,6 +188,7 @@ const Header = () => {
     { name: "Запчасти и аксессуары", href: "/accessories" },
     { name: "Трейд Ин и выкуп", href: "/tradein" },
     { name: "Сервис", href: "/service" },
+    { name: "Сравнение", href: "/compare" },
   ];
 
   const dropdownNavigation = [
@@ -195,6 +196,7 @@ const Header = () => {
     { name: "Отзывы", href: "/reports" },
     { name: "Блог и медиа", href: "/blog" },
     { name: "О нас", href: "/about" },
+    { name: "Сравнение", href: "/compare" },
   ];
 
   const phoneNumber = "+7 (775) 504 91 24";
@@ -226,7 +228,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-800 hover:text-blue-600 transition-colors font-semibold text-base"
+                className="text-gray-800 hover:text-blue-600 transition-colors font-semibold text-sm"
               >
                 {item.name}
               </Link>
