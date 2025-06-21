@@ -4,6 +4,7 @@ export interface Car {
   brand: string;
   model: string;
   year: number;
+  main_image?: string;
   price: {
     usd: number;
     tg: number;

@@ -1,11 +1,11 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { CarDetailCarousel } from "@/components/carDetail/CarDetailCarousel";
 import { PromoBanner } from "@/components/carDetail/PromoBanner";
 import {
-  Phone,
+  // Phone,
   Zap,
   Battery,
   Gauge,
@@ -13,24 +13,25 @@ import {
   Users,
   Settings,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+// import { Button } from "@/components/ui/button";
+// import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ContactForm from "@/components/ContactForm";
 import CarCard from "@/components/CarCard";
-import { getCarBySlug, cars } from "@/data/cars";
+// import { getCarBySlug, cars } from "@/data/cars";
 import Interior360View from "@/components/carDetail/Interior360View";
 import Viewer360 from "@/components/carDetail/Viewer360";
 import { fetchCarBySlug } from '@/services/api'
 import ImageGallery from "./ImageGallery";
 import CarVideo from "./CarVideo";
-import QuickActions from "./QuickActions";
+// import QuickActions from "./QuickActions";
 import MediaContent from "./MediaContent";
-import { get } from "http";
+// import { get } from "http";
 import HeroCar from "@/components/HeroCar";
 import CarDetails from "@/components/carDetail/CarDetails";
 import SimpleContactForm from "@/components/ui/SimpleForm";
 import CarTrimList from "@/components/carDetail/CarTrims";
+import { cars } from "@/data/cars";
 
 
 
@@ -142,7 +143,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
 
           {/* Car Details */}
   <CarDetails
-    car={car}
+    car={{ ...car, main_image: car.main_image ?? "" }}
     formatPrice={formatPrice}
     formatPriceUAH={formatPriceUAH}
   />
