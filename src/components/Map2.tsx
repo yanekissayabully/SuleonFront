@@ -3,14 +3,19 @@
 import { useEffect, useRef } from 'react';
 import { MapPin, Phone, Clock } from 'lucide-react';
 
-// 👇 Чтобы TS не ругался на window.ymaps
-declare global {
-  interface Window {
-    ymaps: any;
-  }
-}
 
-const location = {
+
+
+// .
+
+const location: {
+  name: string;
+  address: string;
+  coords: [number, number];
+  phone: string;
+  hours: string;
+  description: string;
+} = {
   name: '​Магазин автотоваров и запчастей для электромобилей',
   address: 'ул. Прокофьева, 244',
   coords: [43.236010, 76.876759],

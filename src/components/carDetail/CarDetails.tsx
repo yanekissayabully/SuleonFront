@@ -5,8 +5,31 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
+interface CarColor {
+  name: string;
+  image: string;
+}
+
+interface CarPrice {
+  usd: number;
+  tg: number;
+}
+
+interface Car {
+  id: string | number;
+  slug: string;
+  brand: string;
+  model: string;
+  main_image: string;
+  price: CarPrice;
+  category: string;
+  available: boolean;
+  description: string;
+  colors?: CarColor[];
+}
+
 interface CarDetailsProps {
-  car: any;
+  car: Car;
   formatPrice: (price: number) => string;
   formatPriceUAH: (price: number) => string;
 }
@@ -68,7 +91,7 @@ const CarDetails = ({ car, formatPrice, formatPriceUAH }: CarDetailsProps) => {
 
       {/* Quick Actions */}
       <QuickActions car={{
-  id: car.id,
+  id: typeof car.id === "number" ? car.id : Number(car.id),
   slug: car.slug,
   brand: car.brand,
   model: car.model,
@@ -85,7 +108,7 @@ const CarDetails = ({ car, formatPrice, formatPriceUAH }: CarDetailsProps) => {
         <div>
           <h3 className="font-semibold mb-3">Возможные цвета:</h3>
           <div className="flex gap-3">
-            {car.colors.map((color: any) => (
+            {car.colors.map((color: CarColor) => (
               <div key={color.name} className="text-center">
                 <div className="w-12 h-12 rounded-full border-2 border-gray-200 overflow-hidden mb-2">
                   <Image

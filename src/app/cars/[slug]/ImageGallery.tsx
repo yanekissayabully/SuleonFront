@@ -204,7 +204,7 @@ export default function ImageGallery({ car }: { car: Car }) {
         {galleryTabs.map((tab) => (
           <button
             key={tab.key}
-            onClick={() => handleTabChange(tab.key as any)}
+            onClick={() => handleTabChange(tab.key as "exterior" | "interior" | "promo" | "video")}
             className={`px-2.5 py-1 rounded-md text-xm font-medium transition-colors ${
               currentTab === tab.key
                 ? "bg-blue-600 text-white shadow-sm"

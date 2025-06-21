@@ -141,13 +141,26 @@ import { useEffect, useRef } from 'react';
 import { MapPin, Phone, Clock } from 'lucide-react';
 
 // 👇 Чтобы TS не ругался на window.ymaps
+type YMapsType = {
+  ready: (cb: () => void) => void;
+  Map: new (element: HTMLElement, options: any) => any;
+  Placemark: new (coords: [number, number], properties?: any, options?: any) => any;
+};
+
 declare global {
   interface Window {
-    ymaps: any;
+    ymaps: YMapsType;
   }
 }
 
-const location = {
+const location: {
+  name: string;
+  address: string;
+  coords: [number, number];
+  phone: string;
+  hours: string;
+  description: string;
+} = {
   name: 'Офис Suleon Auto',
   address: 'ул. Шахмета Хусаинова, 22',
   coords: [43.238011, 76.888937],
