@@ -140,18 +140,8 @@
 import { useEffect, useRef } from 'react';
 import { MapPin, Phone, Clock } from 'lucide-react';
 
-// 👇 Чтобы TS не ругался на window.ymaps
-type YMapsType = {
-  ready: (cb: () => void) => void;
-  Map: new (element: HTMLElement, options: any) => any;
-  Placemark: new (coords: [number, number], properties?: any, options?: any) => any;
-};
 
-declare global {
-  interface Window {
-    ymaps: YMapsType;
-  }
-}
+
 
 const location: {
   name: string;
