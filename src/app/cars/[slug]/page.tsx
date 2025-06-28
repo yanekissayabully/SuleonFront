@@ -134,20 +134,28 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
 
 
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          
-            {Array.isArray(car.gallery_images) && car.gallery_images.length > 0 && (
-            <ImageGallery car={{ ...car, gallery_images: car.gallery_images }} />
-            )}
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+  {/* Car Details — на мобилке ПЕРВЫЙ, на десктопе ВТОРОЙ */}
+  <div className="order-1 lg:order-2">
+    <CarDetails
+      car={{ ...car, main_image: car.main_image ?? "" }}
+      formatPrice={formatPrice}
+      formatPriceUAH={formatPriceUAH}
+    />
+  </div>
+
+  {/* Gallery — на мобилке ВТОРОЙ, на десктопе ПЕРВЫЙ */}
+  {Array.isArray(car.gallery_images) && car.gallery_images.length > 0 && (
+    <div className="order-2 lg:order-1">
+      <ImageGallery car={{ ...car, gallery_images: car.gallery_images }} />
+    </div>
+  )}
+</div>
 
 
-          {/* Car Details */}
-  <CarDetails
-    car={{ ...car, main_image: car.main_image ?? "" }}
-    formatPrice={formatPrice}
-    formatPriceUAH={formatPriceUAH}
-  />
-        </div>
+{car.trims && <CarTrimList trims={car.trims} />}
+
                     {/* НОВЫЕ табы для 360º обзор */}
 <div className="mt-16">
   <Tabs defaultValue="exterior" className="w-full">
@@ -172,7 +180,6 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
     </TabsContent>
   </Tabs>
   </div>
-{car.trims && <CarTrimList trims={car.trims} />}
         {/* Tabs Section */}
         <div className="mt-16">
           <Tabs defaultValue="specs" className="w-full">
@@ -286,7 +293,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
         {car.slides && <CarDetailCarousel slides={car.slides} />}
         <PromoBanner lastImage={car.last_image}/>
 
-          <SimpleContactForm/>
+        
         {/* Related Cars */}
         {relatedCars.length > 0 && (
           <div className="mt-16">
@@ -300,6 +307,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
             </div>
           </div>
         )}
+        <SimpleContactForm/>
       </div>
     </div>
   );
