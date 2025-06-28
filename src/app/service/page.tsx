@@ -29,24 +29,32 @@ export default function ServicePage() {
   return (
     <div className="bg-white text-stone-800">
       {/* HERO */}
-      <section className="py-20 bg-white text-center">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0, y: 30 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-          }}
-          className="container mx-auto px-4"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-stone-900">
-            Сервис и обслуживание
-          </h1>
-          <p className="text-lg text-stone-600 max-w-xl mx-auto">
-            Официальный сервисный центр для автомобилей BYD и электрокаров. Быстро, надёжно, с гарантией.
-          </p>
-        </motion.div>
-      </section>
+      <section 
+  className="py-20 bg-white text-center relative bg-cover bg-center"
+  style={{ 
+    backgroundImage: "url('/SER.jpg')",
+  }}
+>
+  {/* Добавляем overlay для лучшей читаемости текста */}
+  <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+  
+  <motion.div
+    initial="hidden"
+    animate="visible"
+    variants={{
+      hidden: { opacity: 0, y: 30 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+    }}
+    className="container mx-auto px-4 relative z-10" // z-10 чтобы контент был поверх overlay
+  >
+    <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+      Сервис и обслуживание
+    </h1>
+    <p className="text-lg text-white max-w-xl mx-auto">
+      Официальный сервисный центр для автомобилей BYD и электрокаров. Быстро, надёжно, с гарантией.
+    </p>
+  </motion.div>
+</section>
 
       {/* УСЛУГИ */}
       <section className="py-20 bg-white">
