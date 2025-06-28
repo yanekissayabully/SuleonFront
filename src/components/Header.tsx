@@ -211,18 +211,18 @@ const Header = () => {
   return (
     <header className="bg-white shadow-sm fixed top-0 left-0 w-full z-50">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between py-3">
+        <div className="flex items-center justify-between py-2">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <Image
-              src="/icons/LOGOO.svg"
-              alt="Suleon.auto"
-              width={120}
-              height={40}
-              className="h-12 w-auto object-contain"
-              priority
-            />
-          </Link>
+<Link href="/" className="flex items-center">
+  <Image
+    src="/icons/LOGOO.svg"
+    alt="Suleon.auto"
+    width={160} // Увеличено с 120
+    height={60} // Увеличено с 40
+    className="h-16 w-auto object-contain" // Увеличено с h-12
+    priority
+  />
+</Link>
 
           {/* Center navigation for desktop */}
           <nav className="hidden md:flex items-center gap-8">

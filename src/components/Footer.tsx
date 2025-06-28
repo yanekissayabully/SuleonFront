@@ -44,15 +44,16 @@ const Footer = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-6">
-              <Image
-                src="/icons/LOGOO.svg"
-                alt="SuleonAuto"
-                width={150}
-                height={50}
-                className="h-12 w-auto"
-              />
-            </Link>
+<Link href="/" className="flex items-center">
+  <Image
+    src="/icons/LOGOO.svg"
+    alt="Suleon.auto"
+    width={160} // Увеличено с 120
+    height={60} // Увеличено с 40
+    className="h-16 w-auto object-contain" // Увеличено с h-12
+    priority
+  />
+</Link>
             <p className="text-gray-300 mb-6 leading-relaxed">
               Официальный импортер электромобилей из Китая. Более 9 лет опыта,
               1000+ довольных клиентов, 75 моделей в наличии и под заказ.
