@@ -177,8 +177,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Menu, X } from "lucide-react"; // только нужные иконки
-
+import { Phone, Menu, X, Scale } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -186,9 +185,14 @@ const Header = () => {
   const mainNavigation = [
     { name: "Каталог автомобилей", href: "/models" },
     { name: "Запчасти и аксессуары", href: "/accessories" },
-    { name: "Трейд Ин и выкуп", href: "/tradein" },
+    { name: "Трейд Ин", href: "/tradein" },
     { name: "Сервис", href: "/service" },
-    { name: "Сравнение", href: "/compare" },
+    { 
+      name: "Сравнение", 
+      href: "/compare", 
+      icon: <Scale className="w-5 h-5" />,
+      showIcon: true // Добавляем флаг для отображения иконки вместо текста
+    },
   ];
 
   const dropdownNavigation = [
@@ -196,15 +200,13 @@ const Header = () => {
     { name: "Отзывы", href: "/reports" },
     { name: "Блог и медиа", href: "/blog" },
     { name: "О нас", href: "/about" },
-    { name: "Сравнение", href: "/compare" },
   ];
 
   const phoneNumber = "+7 (775) 504 91 24";
   const whatsappLink = "https://wa.me/77755049124";
   const telegramLink = "https://t.me/suleonauto";
   const instagramLink = "https://instagram.com/suleon.auto";
-  const youtubeLink = "https://www.youtube.com/@suleon_auto"; // твоя ссылка на YouTube
-
+  const youtubeLink = "https://www.youtube.com/@suleon_auto";
 
   return (
     <header className="bg-white shadow-sm fixed top-0 left-0 w-full z-50">
@@ -228,9 +230,10 @@ const Header = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-800 hover:text-blue-600 transition-colors font-semibold text-sm"
+                className={`text-gray-800 hover:text-blue-600 transition-colors font-semibold text-sm flex items-center gap-1 ${item.icon ? "p-1" : ""}`}
+                title={item.name}
               >
-                {item.name}
+                {item.icon ? item.icon : item.name}
               </Link>
             ))}
           </nav>
@@ -315,15 +318,14 @@ const Header = () => {
             {/* For mobile show all links */}
             <div className="md:hidden">
               {mainNavigation.map((item) => (
- <Link
-  key={item.name}
-  href={item.href}
-  className="block py-2 text-gray-700 hover:text-blue-600 transition-colors font-medium text-lg"
-  onClick={() => setIsMenuOpen(false)}
->
-  {item.name}
-</Link>
-
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="flex items-center gap-2 py-2 text-gray-700 hover:text-blue-600 transition-colors font-medium text-lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.showIcon ? item.icon : item.name}
+                </Link>
               ))}
             </div>
             {/* Dropdown navigation */}
@@ -356,14 +358,14 @@ const Header = () => {
               >
                 <img src="/icons/instaLOGO.svg" alt="Instagram" width={24} height={24} />
               </a>
-<a
-    href={youtubeLink}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex items-center gap-2"
-  >
-    <img src="/icons/youtubeLogo.svg" alt="YouTube" width={24} height={24} />
-  </a>
+              <a
+                href={youtubeLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <img src="/icons/youtubeLogo.svg" alt="YouTube" width={24} height={24} />
+              </a>
             </div>
           </nav>
         </div>

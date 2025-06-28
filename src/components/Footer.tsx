@@ -30,7 +30,7 @@ const Footer = () => {
   const quickLinks = [
     { name: "Каталог автомобилей", href: "/models" },
     { name: "Запчасти и аксессуары", href: "/accessories" },
-    { name: "Трейд Ин и выкуп", href: "/tradein" },
+    { name: "Трейд Ин", href: "/tradein" },
     { name: "Сервис Suleon Auto", href: "/service" },
     { name: "Отзывы", href: "/reports" },
     { name: "Блог и медиа", href: "/blog" },
