@@ -172,15 +172,223 @@
 // export default Header;
 
 
+// "use client";
+
+// import { useState } from "react";
+// import Link from "next/link";
+// import Image from "next/image";
+// import { Phone, Menu, X, Scale } from "lucide-react";
+
+// const Header = () => {
+//   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+//   const mainNavigation = [
+//     { name: "Каталог автомобилей", href: "/models" },
+//     { name: "Запчасти и аксессуары", href: "/accessories" },
+//     { name: "Трейд Ин", href: "/tradein" },
+//     { name: "Сервис", href: "/service" },
+//     { 
+//       name: "Сравнение", 
+//       href: "/compare", 
+//       icon: <Scale className="w-5 h-5" />,
+//       showIcon: true // Добавляем флаг для отображения иконки вместо текста
+//     },
+//   ];
+
+//   const dropdownNavigation = [
+//     { name: "Избранное", href: "/favorite"},
+//     { name: "Отзывы", href: "/reports" },
+//     { name: "Блог и медиа", href: "/blog" },
+//     { name: "О нас", href: "/about" },
+//   ];
+
+//   const phoneNumber = "+7 (775) 504 91 24";
+//   const whatsappLink = "https://wa.me/77755049124";
+//   const telegramLink = "https://t.me/suleonauto";
+//   const instagramLink = "https://instagram.com/suleon.auto";
+//   const youtubeLink = "https://www.youtube.com/@suleon_auto";
+
+//   return (
+//     <header className="bg-white shadow-sm fixed top-0 left-0 w-full z-50">
+//       <div className="container mx-auto px-4">
+//         <div className="flex items-center justify-between py-2">
+//           {/* Logo */}
+// <Link href="/" className="flex items-center">
+//   <Image
+//     src="/icons/LOGOO.svg"
+//     alt="Suleon.auto"
+//     width={160} // Увеличено с 120
+//     height={60} // Увеличено с 40
+//     className="h-16 w-auto object-contain" // Увеличено с h-12
+//     priority
+//   />
+// </Link>
+
+//           {/* Center navigation for desktop */}
+//           <nav className="hidden md:flex items-center gap-8">
+//             {mainNavigation.map((item) => (
+//               <Link
+//                 key={item.name}
+//                 href={item.href}
+//                 className={`text-gray-800 hover:text-blue-600 transition-colors font-semibold text-sm flex items-center gap-1 ${item.icon ? "p-1" : ""}`}
+//                 title={item.name}
+//               >
+//                 {item.icon ? item.icon : item.name}
+//               </Link>
+//             ))}
+//           </nav>
+
+//           {/* Right side */}
+//           <div className="flex items-center gap-4">
+//             {/* Phone and WhatsApp for desktop */}
+//             <div className="hidden md:flex items-center gap-4">
+//               <a
+//                 href={`tel:${phoneNumber.replace(/\s/g, "")}`}
+//                 className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors font-semibold"
+//               >
+//                 <Phone className="w-5 h-5" />
+//                 {phoneNumber}
+//               </a>
+//               <a
+//                 href={whatsappLink}
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 className="flex items-center gap-2 bg-green-500 text-white px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors"
+//               >
+//                 <img src="/icons/whatsapp-line.svg" alt="WhatsApp" width={20} height={20} />
+//                 WhatsApp
+//               </a>
+//             </div>
+
+//             {/* Only phone and WhatsApp for mobile */}
+//             <div className="flex md:hidden items-center gap-4">
+//               <a
+//                 href={`tel:${phoneNumber.replace(/\s/g, "")}`}
+//                 className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors font-semibold"
+//               >
+//                 <Phone className="w-5 h-5" />
+//               </a>
+//               <a
+//                 href={whatsappLink}
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 className="flex items-center gap-2 bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors"
+//               >
+//                 <img src="/icons/whatsapp-line.svg" alt="WhatsApp" width={20} height={20} />
+//               </a>
+//             </div>
+
+//             {/* Mobile menu button */}
+//             <button
+//               onClick={() => setIsMenuOpen(!isMenuOpen)}
+//               className="p-2 focus:outline-none md:hidden"
+//             >
+//               {isMenuOpen ? (
+//                 <X className="h-7 w-7 text-gray-800" />
+//               ) : (
+//                 <Menu className="h-7 w-7 text-gray-800" />
+//               )}
+//             </button>
+
+//             {/* Desktop dropdown menu button */}
+//             <div className="hidden md:block">
+//               <button
+//                 onClick={() => setIsMenuOpen(!isMenuOpen)}
+//                 className="p-2 focus:outline-none"
+//               >
+//                 {isMenuOpen ? (
+//                   <X className="h-7 w-7 text-gray-800" />
+//                 ) : (
+//                   <Menu className="h-7 w-7 text-gray-800" />
+//                 )}
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Dropdown menu */}
+//       <div
+//         className={`bg-white shadow-md border-t border-gray-200 overflow-hidden transition-all duration-300 ${
+//           isMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+//         }`}
+//       >
+//         <div className="container mx-auto px-4 py-4">
+//           <nav className="flex flex-col space-y-4">
+//             {/* For mobile show all links */}
+//             <div className="md:hidden">
+//               {mainNavigation.map((item) => (
+//                 <Link
+//                   key={item.name}
+//                   href={item.href}
+//                   className="flex items-center gap-2 py-2 text-gray-700 hover:text-blue-600 transition-colors font-medium text-lg"
+//                   onClick={() => setIsMenuOpen(false)}
+//                 >
+//                   {item.showIcon ? item.icon : item.name}
+//                 </Link>
+//               ))}
+//             </div>
+//             {/* Dropdown navigation */}
+//             {dropdownNavigation.map((item) => (
+//               <Link
+//                 key={item.name}
+//                 href={item.href}
+//                 className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-lg"
+//                 onClick={() => setIsMenuOpen(false)}
+//               >
+//                 {item.name}
+//               </Link>
+//             ))}
+
+//             {/* Social icons */}
+//             <div className="flex gap-6 pt-4 border-t border-gray-200">
+//               <a
+//                 href={telegramLink}
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 className="flex items-center gap-2"
+//               >
+//                 <img src="/icons/logoTG.svg" alt="Telegram" width={24} height={24} />
+//               </a>
+//               <a
+//                 href={instagramLink}
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 className="flex items-center gap-2"
+//               >
+//                 <img src="/icons/instaLOGO.svg" alt="Instagram" width={24} height={24} />
+//               </a>
+//               <a
+//                 href={youtubeLink}
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 className="flex items-center gap-2"
+//               >
+//                 <img src="/icons/youtubeLogo.svg" alt="YouTube" width={24} height={24} />
+//               </a>
+//             </div>
+//           </nav>
+//         </div>
+//       </div>
+//     </header>
+//   );
+// };
+
+// export default Header;
+
+
+
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Menu, X, Scale } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const mainNavigation = [
     { name: "Каталог автомобилей", href: "/models" },
@@ -191,7 +399,7 @@ const Header = () => {
       name: "Сравнение", 
       href: "/compare", 
       icon: <Scale className="w-5 h-5" />,
-      showIcon: true // Добавляем флаг для отображения иконки вместо текста
+      showIcon: true
     },
   ];
 
@@ -208,21 +416,39 @@ const Header = () => {
   const instagramLink = "https://instagram.com/suleon.auto";
   const youtubeLink = "https://www.youtube.com/@suleon_auto";
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // Если меню открыто и клик был не по меню и не по кнопке меню
+      if (isMenuOpen && 
+          menuRef.current && 
+          !menuRef.current.contains(event.target as Node) && 
+          buttonRef.current && 
+          !buttonRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
   return (
     <header className="bg-white shadow-sm fixed top-0 left-0 w-full z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-2">
           {/* Logo */}
-<Link href="/" className="flex items-center">
-  <Image
-    src="/icons/LOGOO.svg"
-    alt="Suleon.auto"
-    width={160} // Увеличено с 120
-    height={60} // Увеличено с 40
-    className="h-16 w-auto object-contain" // Увеличено с h-12
-    priority
-  />
-</Link>
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/icons/LOGOO.svg"
+              alt="Suleon.auto"
+              width={160}
+              height={60}
+              className="h-16 w-auto object-contain"
+              priority
+            />
+          </Link>
 
           {/* Center navigation for desktop */}
           <nav className="hidden md:flex items-center gap-8">
@@ -280,6 +506,7 @@ const Header = () => {
 
             {/* Mobile menu button */}
             <button
+              ref={buttonRef}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 focus:outline-none md:hidden"
             >
@@ -293,6 +520,7 @@ const Header = () => {
             {/* Desktop dropdown menu button */}
             <div className="hidden md:block">
               <button
+                ref={buttonRef}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="p-2 focus:outline-none"
               >
@@ -309,6 +537,7 @@ const Header = () => {
 
       {/* Dropdown menu */}
       <div
+        ref={menuRef}
         className={`bg-white shadow-md border-t border-gray-200 overflow-hidden transition-all duration-300 ${
           isMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         }`}
@@ -328,27 +557,62 @@ const Header = () => {
                 </Link>
               ))}
             </div>
+            
             {/* Dropdown navigation */}
-            {dropdownNavigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-lg"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-4">
+                {dropdownNavigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="block text-gray-700 hover:text-blue-600 transition-colors font-medium text-lg"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+              
+              {/* Social icons - only for desktop and positioned on the right */}
+              <div className="hidden md:flex flex-col items-end justify-center space-y-4">
+                <div className="flex gap-6">
+                  <a
+                    href={telegramLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2"
+                  >
+                    <img src="/icons/logoTG.svg" alt="Telegram" width={32} height={32} />
+                  </a>
+                  <a
+                    href={instagramLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2"
+                  >
+                    <img src="/icons/instaLOGO.svg" alt="Instagram" width={32} height={32} />
+                  </a>
+                  <a
+                    href={youtubeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2"
+                  >
+                    <img src="/icons/youtubeLogo.svg" alt="YouTube" width={32} height={32} />
+                  </a>
+                </div>
+              </div>
+            </div>
 
-            {/* Social icons */}
-            <div className="flex gap-6 pt-4 border-t border-gray-200">
+            {/* Social icons for mobile */}
+            <div className="flex gap-6 pt-4 border-t border-gray-200 md:hidden">
               <a
                 href={telegramLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2"
               >
-                <img src="/icons/logoTG.svg" alt="Telegram" width={24} height={24} />
+                <img src="/icons/logoTG.svg" alt="Telegram" width={28} height={28} />
               </a>
               <a
                 href={instagramLink}
@@ -356,7 +620,7 @@ const Header = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2"
               >
-                <img src="/icons/instaLOGO.svg" alt="Instagram" width={24} height={24} />
+                <img src="/icons/instaLOGO.svg" alt="Instagram" width={28} height={28} />
               </a>
               <a
                 href={youtubeLink}
@@ -364,7 +628,7 @@ const Header = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2"
               >
-                <img src="/icons/youtubeLogo.svg" alt="YouTube" width={24} height={24} />
+                <img src="/icons/youtubeLogo.svg" alt="YouTube" width={28} height={28} />
               </a>
             </div>
           </nav>
