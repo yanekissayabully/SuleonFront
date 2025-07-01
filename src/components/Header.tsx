@@ -702,7 +702,7 @@ const Header = () => {
   return (
     <header className="bg-white shadow-sm fixed top-0 left-0 w-full z-50">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between py-2">
+        <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center -my-4 py-4">
             <Image
