@@ -82,11 +82,9 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 overflow-hidden">
-        {/* Background Image */}
-{/* Background Video */}
+      {/* <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 overflow-hidden">
 <div className="absolute inset-0 overflow-hidden">
   <video
     autoPlay
@@ -142,7 +140,6 @@ const HomePage = () => {
                 </Button>
               </div>
 
-              {/* Stats */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {stats.map((stat, index) => (
                   <motion.div
@@ -168,7 +165,6 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
           animate={{ y: [0, 10, 0] }}
@@ -178,7 +174,102 @@ const HomePage = () => {
             <div className="w-1 h-3 bg-white rounded-full mt-2" />
           </div>
         </motion.div>
-      </section>
+      </section> */}
+
+
+        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 overflow-hidden">
+  {/* Background Video */}
+  <div className="absolute inset-0 overflow-hidden">
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      className="w-full h-full object-cover opacity-30"
+    >
+      <source src="/li9.mp4" type="video/mp4" />
+    </video>
+    <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-transparent" />
+  </div>
+
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="max-w-4xl mx-auto text-center sm:text-left">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-white"
+      >
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold leading-tight mb-4 sm:mb-6">
+          Suleon Auto
+          <span className="block text-xl sm:text-3xl md:text-4xl font-normal text-blue-400 mt-2">
+            Будущее уже здесь
+          </span>
+        </h1>
+
+        <p className="text-base sm:text-xl md:text-2xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto sm:mx-0 leading-relaxed">
+          Более 9 лет мы импортируем лучшие электромобили из Китая.  
+          Доставка, гарантия и сервис в Казахстане.
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start items-center sm:items-start mb-10 sm:mb-12">
+          <Button
+            asChild
+            size="lg"
+            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-lg px-8 py-4 rounded-full"
+          >
+            <Link href="/models" className="flex items-center justify-center">
+              Посмотреть модели
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            className="w-full sm:w-auto text-black border-white hover:bg-white hover:text-slate-900 text-lg px-8 py-4 rounded-full"
+          >
+            Тест-драйв
+          </Button>
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+              className="text-center sm:text-left"
+            >
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-400 mb-1 sm:mb-2">
+                {stat.number}
+              </div>
+              <div className="text-base sm:text-lg font-semibold mb-1">
+                {stat.label}
+              </div>
+              <div className="text-sm text-gray-400">
+                {stat.description}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </div>
+  </div>
+
+  {/* Scroll indicator */}
+  <motion.div
+    className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2"
+    animate={{ y: [0, 10, 0] }}
+    transition={{ duration: 2, repeat: Infinity }}
+  >
+    <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+      <div className="w-1 h-3 bg-white rounded-full mt-2" />
+    </div>
+  </motion.div>
+</section>
+
 
       {/* Featured Cars Section */}
       <section className="py-16 bg-white">
